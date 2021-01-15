@@ -36,7 +36,11 @@ To begin with Clojure:
 * Create a new file with the extension `.clj`
 * Press Control-c then Control-z
 * Type your preferred clojure startup command, the default of "clojure" is fine to start.
+    * Use up arrow and down arrow keys to browse through prior commands used.
+    * `Option-R` to search for an item in history that matches the entered text.
 * Your window will split, and a Clojure REPL will appear with `user=>`
+
+Code can be sent from a file to the REPL with [Clojure shortcuts](#clojure), or entered directly in the REPL.
 
 # Features
 

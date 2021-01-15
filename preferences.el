@@ -37,7 +37,6 @@
 
 (setq inferior-lisp-program "clojure")
 
-;; TODO Add command history
 (defun run-clojure (cmd)
   (interactive (list (read-from-minibuffer "Command:" "clojure")))
   (let ((default-directory (if (boundp 'clojure-project-root-path)
