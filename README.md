@@ -9,8 +9,12 @@ This setup does not reflect final clojure.org quick-start instructions. It assum
 * Install [Aquamacs](https://aquamacs.org/download.html) 3.5 or newer.
 * Launch, then quit, Aquamacs.app to create the preferences directory **OR**
   * `mkdir ~/Library/Preferences/Aquamacs\ Emacs/` in your terminal
-* Clone this repository in `~/Library/Preferences/Aquamacs Emacs/`
+* Clone this repository to your preferred location.
+* cd to the repository
+* `cp preferences.el ~/Library/Preferences/Aquamacs Emacs/Preferences.el`
 * Launch Aquamacs.app
+
+Information presented about "Compiling" and "Warnings" on the first run are normal.
 
 # Setup for new Clojure enthusiasts
 
@@ -19,10 +23,12 @@ These instructions assume a downloadable `Preferences.el` on clojure.org, and th
 * Install [Aquamacs](https://aquamacs.org/download.html) 3.5 or newer.
 * Launch, then quit, Aquamacs.app to create the preferences directory.
 * Download the setup package (link here)
-* Copy `Preferences.el` to `~/Library/Preferences/Aquamacs Emacs/`
+* Copy `preferences.el` to `~/Library/Preferences/Aquamacs Emacs/`
 * Launch Aquamacs.app
 
-# Using Clojure/Aquamacs
+Information presented about "Compiling" and "Warnings" on the first run are normal. Click that window and close it with `command-w`
+
+# Using Clojure
 
 To begin with Clojure:
 
