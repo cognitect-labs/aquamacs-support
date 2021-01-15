@@ -69,7 +69,7 @@
 
 (defun run-clojure (cmd)
   (interactive (list (read-from-minibuffer "Command:" "clojure")))
-  (let ((default-directory (if (boundp 'clojure-project-root-path)
+  (let ((default-directory (if (fboundp 'clojure-project-root-path)
 			                   (clojure-project-root-path)
 			                 default-directory))
 	    cb (curent-buffer))
