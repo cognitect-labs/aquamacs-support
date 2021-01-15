@@ -22,18 +22,48 @@
   (add-to-list 'load-path "<path where use-package is installed>")
   (require 'use-package))
 
-(use-package paredit
-             :ensure t)
-(use-package clojure-mode
-             :ensure t)
-(use-package inf-lisp
-             :ensure t)
-
 (use-package exec-path-from-shell
-  :ensure t)
+             :ensure t)
 
 (when (memq window-system '(mac ns x))
   (exec-path-from-shell-initialize))
+
+(use-package paredit
+             :ensure t
+             :hook ((clojure-mode emacs-lisp lisp-mode lisp-interaction-mode) . paredit-mode)
+             :bind (:map paredit-mode-map
+                         ("M-[" . paredit-wrap-square)
+                         ("M-{" . paredit-wrap-curly)
+                         ("M-<right>" . forward-sexp)
+                         ("M-<left>" . backward-sexp)
+                         ("M-<up>" . backward-up-list)
+                         ("M-<down>" . down-list)
+                         ("<A-return>" . paredit-newline)))
+
+(use-package clojure-mode
+             :ensure t
+             :bind (:map clojure-mode-map
+                         ("C-M-x" . lisp-eval-defun)
+                         ("C-x C-e" . lisp-eval-last-sexp)
+                         ("C-c C-e" . lisp-eval-last-sexp)
+                         ("C-c C-z" . run-clojure)
+                         ("C-c C-r" . lisp-eval-region)
+                         ("C-x C-e" . lisp-eval-last-sexp)
+                         ("C-c C-a" . lisp-show-arglist)
+                         ("C-c C-c" . lisp-compile-defun)
+                         ("C-c C-d" . lisp-describe-sym)
+                         ("C-c C-e" . lisp-eval-defun)
+                         ("C-c C-f" . lisp-show-function-documentation)
+                         ("C-c C-k" . lisp-compile-file)
+                         ("C-c C-l" . lisp-load-file)
+                         ("C-c C-n" . lisp-eval-form-and-next)
+                         ("C-c C-p" . lisp-eval-paragraph)
+                         ("C-c C-r" . lisp-eval-region)
+                         ("C-c C-v" . lisp-show-variable-documentation)
+                         ("C-c C-z" . run-clojure)
+                         ("C-M-x" . lisp-eval-defun)
+                         ("C-M-q" . indent-sexp)))
+
 
 (setq inferior-lisp-program "clojure")
 
@@ -46,46 +76,3 @@
     (run-lisp cmd)
     (switch-to-buffer cb)
     (switch-to-buffer-other-window "*inferior-lisp*")))
-
-(autoload 'paredit-mode "paredit"
-  "Minor mode for pseudo-structurally editing Lisp code." t)
-(add-hook 'clojure-mode-hook          (lambda () (paredit-mode +1)))
-(add-hook 'emacs-lisp-mode-hook       (lambda () (paredit-mode +1)))
-(add-hook 'lisp-mode-hook             (lambda () (paredit-mode +1)))
-(add-hook 'lisp-interaction-mode-hook (lambda () (paredit-mode +1)))
-
-(eval-after-load 'paredit
-  '(progn
-     (define-key paredit-mode-map (kbd "M-[") 'paredit-wrap-square)
-     (define-key paredit-mode-map (kbd "M-{") 'paredit-wrap-curly)
-     (define-key paredit-mode-map (kbd "M-<right>") 'forward-sexp)
-     (define-key paredit-mode-map (kbd "M-<left>") 'backward-sexp)
-     (define-key paredit-mode-map (kbd "M-<up>") 'backward-up-list)
-     (define-key paredit-mode-map (kbd "M-<down>") 'down-list)
-     (define-key paredit-mode-map (kbd "<A-return>") 'paredit-newline)))
-
-(defun add-clojure-eval ()
-  (define-key clojure-mode-map (kbd "C-M-x") 'lisp-eval-defun)
-  (define-key clojure-mode-map (kbd "C-x C-e") 'lisp-eval-last-sexp)
-  (define-key clojure-mode-map (kbd "C-c C-e") 'lisp-eval-last-sexp)
-  (define-key clojure-mode-map (kbd "C-c C-z") 'run-clojure)
-  (define-key clojure-mode-map (kbd "C-c C-r") 'lisp-eval-region)
-  (define-key clojure-mode-map (kbd "C-x C-e") 'lisp-eval-last-sexp)
-  (define-key clojure-mode-map (kbd "C-c C-a") 'lisp-show-arglist)
-  (define-key clojure-mode-map (kbd "C-c C-c") 'lisp-compile-defun)
-  (define-key clojure-mode-map (kbd "C-c C-d") 'lisp-describe-sym)
-  (define-key clojure-mode-map (kbd "C-c C-e") 'lisp-eval-defun)
-  (define-key clojure-mode-map (kbd "C-c C-f") 'lisp-show-function-documentation)
-  (define-key clojure-mode-map (kbd "C-c C-k") 'lisp-compile-file)
-  (define-key clojure-mode-map (kbd "C-c C-l") 'lisp-load-file)
-  (define-key clojure-mode-map (kbd "C-c C-n") 'lisp-eval-form-and-next)
-  (define-key clojure-mode-map (kbd "C-c C-p") 'lisp-eval-paragraph)
-  (define-key clojure-mode-map (kbd "C-c C-r") 'lisp-eval-region)
-  (define-key clojure-mode-map (kbd "C-c C-v") 'lisp-show-variable-documentation)
-  (define-key clojure-mode-map (kbd "C-c C-z") 'run-clojure)
-  (define-key clojure-mode-map (kbd "C-M-x") 'lisp-eval-defun)
-  (define-key clojure-mode-map (kbd "C-M-q") 'indent-sexp))
-(add-hook 'clojure-mode-hook 'add-clojure-eval)
-
-
-
