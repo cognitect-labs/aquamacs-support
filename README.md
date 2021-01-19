@@ -34,53 +34,53 @@ TODO: Replace emacs function name with simple description
 
 ## Paredit
 
-| Hotkey      | Function                    |
-| ---         | ---                         |
-| M-[         | paredit-wrap-square         |
-| M-{         | paredit-wrap-curly          |
-| M-<right>   | forward-sexp                |
-| M-<left>    | backward-sexp               |
-| M-<up>      | backward-up-list            |
-| M-<down>    | down-list                   |
-| <A-return>  | paredit-newline             |
-| M-<right>   | paredit-forward             |
-| M-<left>    | paredit-backward            |
-| M-<up>      | paredit-backward-up         |
-| M-<down>    | paredit-forward-down        |
-| M-q         | paredit-reindent-defun      |
-| C-<left>    | paredit-forward-barf-sexp   |
-| C-M-<right> | paredit-backward-barf-sexp  |
-| C-<right>   | paredit-forward-slurp-sexp  |
-| C-M-<left>  | paredit-backward-slurp-sexp |
-| M-S-s       | paredit-split-sexp          |
-| M-s         | paredit-splice-sexp         |
-| C-k         | paredit-kill                |
-| C-S-k       | paredit-kill-backward       |
+| Hotkey        | Function                    |
+| ---           | ---                         |
+| M-[           | paredit-wrap-square         |
+| M-{           | paredit-wrap-curly          |
+| M-\<right\>   | forward-sexp                |
+| M-\<left\>    | backward-sexp               |
+| M-\<up\>      | backward-up-list            |
+| M-\<down\>    | down-list                   |
+| \<A-return\>  | paredit-newline             |
+| M-\<right\>   | paredit-forward             |
+| M-\<left\>    | paredit-backward            |
+| M-\<up\>      | paredit-backward-up         |
+| M-\<down\>    | paredit-forward-down        |
+| M-q           | paredit-reindent-defun      |
+| C-\<left\>    | paredit-forward-barf-sexp   |
+| C-M-\<right\> | paredit-backward-barf-sexp  |
+| C-\<right\>   | paredit-forward-slurp-sexp  |
+| C-M-\<left\>  | paredit-backward-slurp-sexp |
+| M-S-s         | paredit-split-sexp          |
+| M-s           | paredit-splice-sexp         |
+| C-k           | paredit-kill                |
+| C-S-k         | paredit-kill-backward       |
 
 
 ## Clojure
      
-| Hotkey      | Function                         |
-| ---         | ---                              |
-| C-:         | clojure-toggle-keyword-string    |
-| C-c <space> | clojure-align                    |
-| C-M-x       | lisp-eval-defun                  |
-| C-x C-e     | lisp-eval-last-sexp              |
-| C-c C-e     | lisp-eval-last-sexp              |
-| C-c C-z     | run-clojure                      |
-| C-c C-r     | lisp-eval-region                 |
-| C-x C-e     | lisp-eval-last-sexp              |
-| C-c C-a     | lisp-show-arglist                |
-| C-c C-c     | lisp-compile-defun               |
-| C-c C-d     | lisp-describe-sym                |
-| C-c C-e     | lisp-eval-defun                  |
-| C-c C-f     | lisp-show-function-documentation |
-| C-c C-k     | lisp-compile-file                |
-| C-c C-l     | lisp-load-file                   |
-| C-c C-n     | lisp-eval-form-and-next          |
-| C-c C-p     | lisp-eval-paragraph              |
-| C-c C-r     | lisp-eval-region                 |
-| C-c C-v     | lisp-show-variable-documentation |
-| C-c C-z     | run-clojure                      |
-| C-M-x       | lisp-eval-defun                  |
-| C-M-q       | indent-sexp                      |
+| Hotkey        | Function                         |
+| ---           | ---                              |
+| C-:           | clojure-toggle-keyword-string    |
+| C-c \<space\> | clojure-align                    |
+| C-M-x         | lisp-eval-defun                  |
+| C-x C-e       | lisp-eval-last-sexp              |
+| C-c C-e       | lisp-eval-last-sexp              |
+| C-c C-z       | run-clojure                      |
+| C-c C-r       | lisp-eval-region                 |
+| C-x C-e       | lisp-eval-last-sexp              |
+| C-c C-a       | lisp-show-arglist                |
+| C-c C-c       | lisp-compile-defun               |
+| C-c C-d       | lisp-describe-sym                |
+| C-c C-e       | lisp-eval-defun                  |
+| C-c C-f       | lisp-show-function-documentation |
+| C-c C-k       | lisp-compile-file                |
+| C-c C-l       | lisp-load-file                   |
+| C-c C-n       | lisp-eval-form-and-next          |
+| C-c C-p       | lisp-eval-paragraph              |
+| C-c C-r       | lisp-eval-region                 |
+| C-c C-v       | lisp-show-variable-documentation |
+| C-c C-z       | run-clojure                      |
+| C-M-x         | lisp-eval-defun                  |
+| C-M-q         | indent-sexp                      |
