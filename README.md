@@ -2,38 +2,19 @@
 
 A quick-start [Clojure](https://clojure.org) development environment for use with [Aquamacs](https://aquamacs.org).
 
-# Setup for experienced developers
+# Setup
 
-This setup does not reflect final clojure.org quick-start instructions. It assumes familiarity with git and the command line.
-
-* Install [Aquamacs](https://aquamacs.org/download.html) 3.5 or newer.
-* Launch, then quit, Aquamacs.app to create the preferences directory **OR**
-  * `mkdir ~/Library/Preferences/Aquamacs\ Emacs/` in your terminal
-* Clone this repository to your preferred location.
-* cd to the repository
-* `cp preferences.el ~/Library/Preferences/Aquamacs Emacs/Preferences.el`
-* Launch Aquamacs.app
-
-Information presented about "Compiling" and "Warnings" on the first run are normal.
-
-# Setup for new Clojure enthusiasts
-
-These instructions assume a downloadable `Preferences.el` on clojure.org, and that the user has Clojure.
-
-* Install [Aquamacs](https://aquamacs.org/download.html) 3.5 or newer.
-* Launch, then quit, Aquamacs.app to create the preferences directory.
-* Download the setup package (link here)
-* Copy `preferences.el` to `~/Library/Preferences/Aquamacs Emacs/`
-* Launch Aquamacs.app
-
-Information presented about "Compiling" and "Warnings" on the first run are normal. Click that window and close it with `command-w`
+* Install [Aquamacs](https://aquamacs.org)
+* Copy the .el files in this repository to ~/Library/Preferences/Aquamacs\ Emacs/
+  * TODO - Expand on instructions here with Github release zip, mkdir, cp.
+* Launch Aquamacs
 
 # Using Clojure
 
 To begin with Clojure:
 
 * Launch Aquamacs.app
-* Create a new file with the extension `.clj`
+* Create a new file with the extension `.clj`, `.cljc`, `.cljs` or `.edn`
 * Press Control-c then Control-z
 * Type your preferred clojure startup command, the default of "clojure" is fine to start.
     * Use up arrow and down arrow keys to browse through prior commands used.
@@ -53,39 +34,53 @@ TODO: Replace emacs function name with simple description
 
 ## Paredit
 
-Hotkey | Function
-| --- | --- |
-| M-[ 	| paredit-wrap-square |
-| M-{ 	| paredit-wrap-curly |
-| M-<right> 	| forward-sexp |
-| M-<left> 	| backward-sexp |
-| M-<up> 	| backward-up-list |
-| M-<down> 	| down-list |
-| <A-return> 	| paredit-newline |
+| Hotkey      | Function                    |
+| ---         | ---                         |
+| M-[         | paredit-wrap-square         |
+| M-{         | paredit-wrap-curly          |
+| M-<right>   | forward-sexp                |
+| M-<left>    | backward-sexp               |
+| M-<up>      | backward-up-list            |
+| M-<down>    | down-list                   |
+| <A-return>  | paredit-newline             |
+| M-<right>   | paredit-forward             |
+| M-<left>    | paredit-backward            |
+| M-<up>      | paredit-backward-up         |
+| M-<down>    | paredit-forward-down        |
+| M-q         | paredit-reindent-defun      |
+| C-<left>    | paredit-forward-barf-sexp   |
+| C-M-<right> | paredit-backward-barf-sexp  |
+| C-<right>   | paredit-forward-slurp-sexp  |
+| C-M-<left>  | paredit-backward-slurp-sexp |
+| M-S-s       | paredit-split-sexp          |
+| M-s         | paredit-splice-sexp         |
+| C-k         | paredit-kill                |
+| C-S-k       | paredit-kill-backward       |
+
 
 ## Clojure
      
-Hotkey | Function
-| --- | --- |
-| C-: | clojure-toggle-keyword-string |
-| C-c <space> | clojure-align |
-| C-M-x 	| lisp-eval-defun |
-| C-x C-e | lisp-eval-last-sexp |
-| C-c C-e | lisp-eval-last-sexp |
-| C-c C-z | run-clojure |
-| C-c C-r | lisp-eval-region |
-| C-x C-e | lisp-eval-last-sexp |
-| C-c C-a | lisp-show-arglist |
-| C-c C-c | lisp-compile-defun |
-| C-c C-d | lisp-describe-sym |
-| C-c C-e | lisp-eval-defun |
-| C-c C-f | lisp-show-function-documentation |
-| C-c C-k | lisp-compile-file |
-| C-c C-l | lisp-load-file |
-| C-c C-n | lisp-eval-form-and-next |
-| C-c C-p | lisp-eval-paragraph |
-| C-c C-r | lisp-eval-region |
-| C-c C-v | lisp-show-variable-documentation |
-| C-c C-z | run-clojure |
-| C-M-x 	| lisp-eval-defun |
-| C-M-q 	| indent-sexp |
+| Hotkey      | Function                         |
+| ---         | ---                              |
+| C-:         | clojure-toggle-keyword-string    |
+| C-c <space> | clojure-align                    |
+| C-M-x       | lisp-eval-defun                  |
+| C-x C-e     | lisp-eval-last-sexp              |
+| C-c C-e     | lisp-eval-last-sexp              |
+| C-c C-z     | run-clojure                      |
+| C-c C-r     | lisp-eval-region                 |
+| C-x C-e     | lisp-eval-last-sexp              |
+| C-c C-a     | lisp-show-arglist                |
+| C-c C-c     | lisp-compile-defun               |
+| C-c C-d     | lisp-describe-sym                |
+| C-c C-e     | lisp-eval-defun                  |
+| C-c C-f     | lisp-show-function-documentation |
+| C-c C-k     | lisp-compile-file                |
+| C-c C-l     | lisp-load-file                   |
+| C-c C-n     | lisp-eval-form-and-next          |
+| C-c C-p     | lisp-eval-paragraph              |
+| C-c C-r     | lisp-eval-region                 |
+| C-c C-v     | lisp-show-variable-documentation |
+| C-c C-z     | run-clojure                      |
+| C-M-x       | lisp-eval-defun                  |
+| C-M-q       | indent-sexp                      |
