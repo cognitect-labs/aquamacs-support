@@ -7,10 +7,6 @@
 
 (eval-after-load 'paredit
   '(progn
-     (define-key paredit-mode-map (kbd "M-<right>") 'paredit-forward)
-     (define-key paredit-mode-map (kbd "M-<left>") 'paredit-backward)
-     (define-key paredit-mode-map (kbd "M-<up>") 'paredit-backward-up)
-     (define-key paredit-mode-map (kbd "M-<down>") 'paredit-forward-down)
      (define-key paredit-mode-map (kbd "M-q") 'paredit-reindent-defun)
      (define-key paredit-mode-map (kbd "C-<left>") 'paredit-forward-barf-sexp)
      (define-key paredit-mode-map (kbd "C-M-<right>") 'paredit-backward-barf-sexp)
