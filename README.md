@@ -23,6 +23,25 @@ To begin with Clojure:
 
 Code can be sent from a file to the REPL with [Clojure shortcuts](#clojure), or entered directly in the REPL.
 
+## .dir-locals.el
+
+A file named `.dir-locals.el` can be placed anywhere upstream of the file you run clojure on.
+
+The `.dir-locals.el` nearest to your current file will be loaded.
+
+~~~
+((clojure-mode (clj-repl-command "clj -A:test"
+				                 "clj -X:socketserver :port 1337"
+				                 "java -jar clojure.jar"
+				                 "clojure")))
+~~~
+
+When running `run-clojure` with this `.dir-locals.el` you will be presented with `clj -A:test` as the command to run.
+
+The other commands will be available for quick access in your immediate command history.
+
+TODO: Coalesce with implicit minibuffer command history.
+
 # Features
 
 * [Clojure Mode](https://github.com/clojure-emacs/clojure-mode)
@@ -62,12 +81,13 @@ TODO: Replace emacs function name with simple description
      
 | Hotkey        | Function                         |
 | ---           | ---                              |
+| C-z           | (run-lisp "clojure")             |
+| C-c C-z       | run-clojure-command              |
 | C-:           | clojure-toggle-keyword-string    |
 | C-c \<space\> | clojure-align                    |
 | C-M-x         | lisp-eval-defun                  |
 | C-x C-e       | lisp-eval-last-sexp              |
 | C-c C-e       | lisp-eval-last-sexp              |
-| C-c C-z       | run-clojure                      |
 | C-c C-r       | lisp-eval-region                 |
 | C-x C-e       | lisp-eval-last-sexp              |
 | C-c C-a       | lisp-show-arglist                |

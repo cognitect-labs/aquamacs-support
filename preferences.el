@@ -67,12 +67,25 @@
 
 (setq inferior-lisp-program "clojure")
 
-(defun run-clojure (cmd)
-  (interactive (list (read-from-minibuffer "Command:" "clojure")))
-  (let ((default-directory (if (fboundp 'clojure-project-root-path)
-			                   (clojure-project-root-path)
-			                 default-directory))
+(defvar clj-repl-command)
+
+(defun run-clojure-command (cmd)
+  (interactive (list (if (boundp 'clj-repl-command)
+                         (let ((first-command (car clj-repl-command))
+                               (rest-commands (cdr clj-repl-command)))
+                           (read-from-minibuffer "Command:" first-command nil nil 'rest-commands))
+                       (read-from-minibuffer "Command:" "clojure"))))
+  (let ((dd (if (and (fboundp 'clojure-project-root-path)
+                     (stringp (clojure-project-root-path)))
+			    (clojure-project-root-path)
+			  default-directory))
 	    cb (curent-buffer))
-    (run-lisp cmd)
+    (cd dd)
+    (run-lisp "clojure")
     (switch-to-buffer cb)
     (switch-to-buffer-other-window "*inferior-lisp*")))
+
+;; Remove this line to disable warnings about unsafe variables when using .dir-locals with 'run-command
+;; Only use this if you are certain of the integrity of .dir-locals files upstream of where you launch your REPL
+
+;; (put 'clj-repl-command 'safe-local-variable (lambda () t))
