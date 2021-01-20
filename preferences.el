@@ -81,7 +81,7 @@
 			  default-directory))
 	    cb (curent-buffer))
     (cd dd)
-    (run-lisp "clojure")
+    (run-lisp cmd)
     (switch-to-buffer cb)
     (switch-to-buffer-other-window "*inferior-lisp*")))
 
