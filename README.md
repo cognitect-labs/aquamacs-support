@@ -29,10 +29,10 @@ Code can be sent from a file to the REPL with [Clojure shortcuts](#clojure), or 
 A file named `.dir-locals.el` can be placed anywhere upstream of the file you run clojure on.
 
 ~~~
-((clojure-mode (clj-repl-command "clojure -A:dev"
+(clojure-mode (clj-repl-command "clojure -A:dev"
     "clojure -X:socketserver :port 1337"
 				                 "java -jar clojure.jar"
-				                 "clojure")))
+				                 "clojure"))
 ~~~
 
 When using `Control-c Control-z` with this `.dir-locals.el` you will be able to:
@@ -58,6 +58,96 @@ It is recommended to keep a single `.dir-locals.el` in the root directory of you
 
 If the project already has a `.dir-locals.el` that you can not change (perhaps it's under version control), then you can place your user settings in `.dir-locals-2.el`.
 
+# What is Paredit?
+
+Clojure code is data, and it can be edited and navigated with a concept called "Structured Editing". A package named "Paredit" for structured editing.
+
+Paredit allows you to edit and navigate Clojure code in a regular and predictable manner by acting on forms.
+
+Code:
+
+`(println "1 + 2 = " (+ 1 2))`
+
+Forms:
+
+* `(println "1 + 2 = " (+ 1 2))`
+  * `println`
+  * `"1 + 2 = "`
+* `(+ 1 2)`
+  * `+`
+  * `1`
+  * `2`
+  
+Each data structure is a form, and each atomic unit is a form. This relationship allows for editing and navigation that acts on the structure of the code. Structured editing differs from editing systems that need to understand what the code _means_ to act in a logical manner.
+
+Paredit expects all of your delimiters (`()`, `[]` `{}`) to be in matching pairs. If you use Paredit for your code editing and restructuring, then your code will remain structured. 
+
+(TODO: Rephrase previous sentence. It is technically incorrect. `Option-Shift-up` is a counter example, since it will usually select a single delimiter)
+
+## Using Paredit
+
+Paredit's commands offer 3 types of operation: moving the cursor, creating structure, and changing the structure of code.
+
+The examples indicate the cursor with a `❚`.
+
+### Navigation
+
+**TODO** - These are best presented as _slow_ and deliberate animations. Current sources utilize fast-moving and confusing code screen-caps.
+
+The navigation commands can be accompanied by the `Shift` key to make a selection from the starting cursor location to the ending cursor location. Using `Shift` is most common for selecting forms with `Option-Shift-right` and `Option-Shift-left`.
+
+Move forward over forms with `Option-right`.
+
+* Ex 1.
+  * `❚(println "1 + 2 = " (+ 1 2))`
+  * `(println "1 + 2 = " (+ 1 2))❚`
+
+* Ex 2.
+  * `(❚println "1 + 2 = " (+ 1 2))`
+  * `(println❚ "1 + 2 = " (+ 1 2))`
+
+* Ex 3.
+  * `(println "1 + 2 = " ❚(+ 1 2))`
+  * `(println "1 + 2 = " (+ 1 2)❚)`
+
+Move backward over forms with `Option-left`.
+
+* Ex 1.
+  * `(println "1 + 2 = " (+ 1 2))❚`
+  * `❚(println "1 + 2 = " (+ 1 2))`
+
+* Ex 2.
+  * `(println "1 + 2 = "❚ (+ 1 2))`
+  * `(println ❚"1 + 2 = " (+ 1 2))` 
+
+* Ex 3.
+  * `(println "1 + 2 = " (+ 1 2)❚)`
+  *`(println "1 + 2 = " ❚(+ 1 2))` 
+
+Move into the next form of forms (??) with `Option-down`
+
+* Ex 1.
+  * `❚(println "1 + 2 = " (+ 1 2))*`
+  * `(❚println "1 + 2 = " (+ 1 2))*`
+
+* Ex 2.
+  * `(❚println "1 + 2 = " (+ 1 2))*`
+  * `(println "1 + 2 = " (❚+ 1 2))*`
+
+Move out of the current containing form (??) with `Option-up`
+
+* Ex 1.
+  * `(println "1 + 2 = " (+ 1❚ 2))*`
+  * `(println "1 + 2 = " ❚(+ 1 2))*`
+
+* Ex 2.
+  * `(println "1 + 2 = " ❚(+ 1 2))*`
+  * `❚(println "1 + 2 = " (+ 1 2))*`
+
+### Create Structure
+
+### Edit Structure
+
 # Features
 
 * [Clojure Mode](https://github.com/clojure-emacs/clojure-mode)
@@ -71,13 +161,13 @@ TODO: Replace emacs function name with simple description
 
 | Hotkey                   | Function                    |
 | ---                      | ---                         |
-| Option-[                 | paredit-wrap-square         |
-| Option-{                 | paredit-wrap-curly          |
-| Option-(                 | paredit-wrap-round          |
 | Option-\<right\>         | forward-sexp                |
 | Option-\<left\>          | backward-sexp               |
 | Option-\<up\>            | backward-up-list            |
 | Option-\<down\>          | down-list                   |
+| Option-[                 | paredit-wrap-square         |
+| Option-{                 | paredit-wrap-curly          |
+| Option-(                 | paredit-wrap-round          |
 | \<A-return\>             | paredit-newline             |
 | Option-q                 | paredit-reindent-defun      |
 | Control-\<left\>         | paredit-forward-barf-sexp   |
@@ -88,7 +178,7 @@ TODO: Replace emacs function name with simple description
 | Option-s                 | paredit-splice-sexp         |
 | Control-k                | paredit-kill                |
 | Control-Shift-k          | paredit-kill-backward       |
-
+  
 
 ## Clojure
      
