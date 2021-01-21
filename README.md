@@ -99,3 +99,8 @@ TODO: Replace emacs function name with simple description
 | C-c C-v       | lisp-show-variable-documentation |
 | C-M-x         | lisp-eval-defun                  |
 | C-M-q         | indent-sexp                      |
+
+# Package Sources
+
+* [clojure-mode 5.12.0](https://github.com/clojure-emacs/clojure-mode/releases/tag/5.12.0)
+* [paredit stable](http://mumble.net/~campbell/git/paredit.git/)
