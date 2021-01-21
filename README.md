@@ -29,8 +29,8 @@ Code can be sent from a file to the REPL with [Clojure shortcuts](#clojure), or 
 A file named `.dir-locals.el` can be placed anywhere upstream of the file you run clojure on.
 
 ~~~
-((clojure-mode (clj-repl-command "clj -A:test"
-				                 "clj -X:socketserver :port 1337"
+((clojure-mode (clj-repl-command "clojure -A:dev"
+				                 "clojure -X:socketserver :port 1337"
 				                 "java -jar clojure.jar"
 				                 "clojure")))
 ~~~
