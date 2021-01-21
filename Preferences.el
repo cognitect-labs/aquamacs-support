@@ -40,24 +40,23 @@
 
 (eval-after-load 'clojure-mode
   '(progn
-     (define-key paredit-mode-map (kbd "C-c C-z") 'run-clojure)
      (define-key paredit-mode-map (kbd "C-z") 'run-clojure-no-prompt)
-     (define-key paredit-mode-map (kbd "C-M-x") 'lisp-eval-defun) ;; primary eval mode
+     (define-key paredit-mode-map (kbd "C-c C-z") 'run-clojure)
+     (define-key paredit-mode-map (kbd "C-M-x") 'lisp-eval-defun) ;; primary eval command
      (define-key paredit-mode-map (kbd "C-c C-e") 'lisp-eval-defun)
-     (define-key paredit-mode-map (kbd "C-x C-e") 'lisp-eval-last-sexp)
-     (define-key paredit-mode-map (kbd "C-c C-r") 'lisp-eval-region)
      (define-key paredit-mode-map (kbd "C-x C-e") 'lisp-eval-last-sexp)
      (define-key paredit-mode-map (kbd "C-c C-l") 'lisp-load-file)
      (define-key paredit-mode-map (kbd "C-c C-n") 'lisp-eval-form-and-next)
      (define-key paredit-mode-map (kbd "C-c C-p") 'lisp-eval-paragraph)
      (define-key paredit-mode-map (kbd "C-c C-r") 'lisp-eval-region)
+     (define-key paredit-mode-map (kbd "C-M-q") 'indent-sexp)
      (define-key paredit-mode-map (kbd "C-c C-v") 'lisp-show-variable-documentation) ;; not working currently
      (define-key paredit-mode-map (kbd "C-c C-a") 'lisp-show-arglist) ;; not working currently
      (define-key paredit-mode-map (kbd "C-c C-c") 'lisp-compile-defun) ;; not working currently
      (define-key paredit-mode-map (kbd "C-c C-d") 'lisp-describe-sym) ;; not working currently
      (define-key paredit-mode-map (kbd "C-c C-f") 'lisp-show-function-documentation) ;; not working currently
      (define-key paredit-mode-map (kbd "C-c C-k") 'lisp-compile-file) ;; not working currently
-     (define-key paredit-mode-map (kbd "C-M-q") 'indent-sexp)))
+     ))
 
 (add-hook 'eval-expression-minibuffer-setup-hook #'enable-paredit-mode)
 (add-hook 'lisp-mode-hook              #'enable-paredit-mode)

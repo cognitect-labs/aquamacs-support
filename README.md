@@ -69,53 +69,59 @@ TODO: Replace emacs function name with simple description
 
 ## Paredit
 
-| Hotkey        | Function                    |
-| ---           | ---                         |
-| M-[           | paredit-wrap-square         |
-| M-{           | paredit-wrap-curly          |
-| M-(           | paredit-wrap-round          |
-| M-\<right\>   | forward-sexp                |
-| M-\<left\>    | backward-sexp               |
-| M-\<up\>      | backward-up-list            |
-| M-\<down\>    | down-list                   |
-| \<A-return\>  | paredit-newline             |
-| M-q           | paredit-reindent-defun      |
-| C-\<left\>    | paredit-forward-barf-sexp   |
-| C-M-\<right\> | paredit-backward-barf-sexp  |
-| C-\<right\>   | paredit-forward-slurp-sexp  |
-| C-M-\<left\>  | paredit-backward-slurp-sexp |
-| M-S-s         | paredit-split-sexp          |
-| M-s           | paredit-splice-sexp         |
-| C-k           | paredit-kill                |
-| C-S-k         | paredit-kill-backward       |
+| Hotkey                   | Function                    |
+| ---                      | ---                         |
+| Option-[                 | paredit-wrap-square         |
+| Option-{                 | paredit-wrap-curly          |
+| Option-(                 | paredit-wrap-round          |
+| Option-\<right\>         | forward-sexp                |
+| Option-\<left\>          | backward-sexp               |
+| Option-\<up\>            | backward-up-list            |
+| Option-\<down\>          | down-list                   |
+| \<A-return\>             | paredit-newline             |
+| Option-q                 | paredit-reindent-defun      |
+| Control-\<left\>         | paredit-forward-barf-sexp   |
+| Control-Option-\<right\> | paredit-backward-barf-sexp  |
+| Control-\<right\>        | paredit-forward-slurp-sexp  |
+| Control-Option-\<left\>  | paredit-backward-slurp-sexp |
+| Option-Shift-s           | paredit-split-sexp          |
+| Option-s                 | paredit-splice-sexp         |
+| Control-k                | paredit-kill                |
+| Control-Shift-k          | paredit-kill-backward       |
 
 
 ## Clojure
      
-| Hotkey        | Function                                              |
-| ---           | ---                                                   |
-| C-z           | Start REPL with first .dir-locals value, or "clojure" |
-| C-c C-z       | Start REPL, prompt for command                        |
-| C-:           | clojure-toggle-keyword-string                         |
-| C-c \<space\> | clojure-align                                         |
-| C-M-x         | lisp-eval-defun                                       |
-| C-x C-e       | lisp-eval-last-sexp                                   |
-| C-c C-e       | lisp-eval-last-sexp                                   |
-| C-c C-r       | lisp-eval-region                                      |
-| C-x C-e       | lisp-eval-last-sexp                                   |
-| C-c C-a       | lisp-show-arglist                                     |
-| C-c C-c       | lisp-compile-defun                                    |
-| C-c C-d       | lisp-describe-sym                                     |
-| C-c C-e       | lisp-eval-defun                                       |
-| C-c C-f       | lisp-show-function-documentation                      |
-| C-c C-k       | lisp-compile-file                                     |
-| C-c C-l       | lisp-load-file                                        |
-| C-c C-n       | lisp-eval-form-and-next                               |
-| C-c C-p       | lisp-eval-paragraph                                   |
-| C-c C-r       | lisp-eval-region                                      |
-| C-c C-v       | lisp-show-variable-documentation                      |
-| C-M-x         | lisp-eval-defun                                       |
-| C-M-q         | indent-sexp                                           |
+| Hotkey              | Function                                              |
+| ---                 | ---                                                   |
+| Control-z           | Start REPL with first .dir-locals value, or "clojure" |
+| Control-c Control-z | Start REPL, prompt for command                        |
+| Control-:           | clojure-toggle-keyword-string                         |
+| Control-c \<space\> | clojure-align                                         |
+| Control-Option-x    | lisp-eval-defun                                       |
+| Control-c Control-e | lisp-eval-defun                                       |
+| Control-x Control-e | lisp-eval-last-sexp                                   |
+| Control-c Control-e | lisp-eval-last-sexp                                   |
+| Control-c Control-r | lisp-eval-region                                      |
+| Control-Option-q    | indent-sexp                                           |
+
+
+### Currently not operational or unexplored
+
+Additional code needed to enable:
+
+| Control-c Control-a | lisp-show-arglist                                     |
+| Control-c Control-c | lisp-compile-defun                                    |
+| Control-c Control-d | lisp-describe-sym                                     |
+| Control-c Control-f | lisp-show-function-documentation                      |
+| Control-c Control-v | lisp-show-variable-documentation                      |
+
+Unexplored:
+
+| Control-c Control-p | lisp-eval-paragraph                                   |
+| Control-c Control-k | lisp-compile-file                                     |
+| Control-c Control-l | lisp-load-file                                        |
+| Control-c Control-n | lisp-eval-form-and-next                               |
 
 # Package Sources
 
