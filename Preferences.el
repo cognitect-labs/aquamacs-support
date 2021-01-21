@@ -40,7 +40,7 @@
 (eval-after-load 'clojure-mode
   '(progn
      (define-key paredit-mode-map (kbd "C-c C-z") 'run-clojure-command)
-     (define-key paredit-mode-map (kbd "C-z") '(lambda () (interactive) (run-clojure-command "clojure")))
+     (define-key paredit-mode-map (kbd "C-z") 'run-clojure-no-prompt)
      (define-key paredit-mode-map (kbd "C-M-x") 'lisp-eval-defun) ;; primary eval mode
      (define-key paredit-mode-map (kbd "C-c C-e") 'lisp-eval-defun)
      (define-key paredit-mode-map (kbd "C-x C-e") 'lisp-eval-last-sexp)
@@ -70,6 +70,13 @@
 (defvar clj-repl-command-history '())
 
 (add-to-list 'savehist-additional-variables 'clj-repl-command-history)
+
+(defun run-clojure-no-prompt ()
+  (interactive)
+  (if (and (boundp 'clj-repl-command)
+           (stringp (car clj-repl-command)))
+      (run-clojure-command (car clj-repl-command))
+    (run-clojure-command "clojure")))
 
 (defun run-clojure-command (cmd)
   (interactive (list (if (boundp 'clj-repl-command)

@@ -30,17 +30,19 @@ A file named `.dir-locals.el` can be placed anywhere upstream of the file you ru
 
 ~~~
 ((clojure-mode (clj-repl-command "clojure -A:dev"
-				                 "clojure -X:socketserver :port 1337"
+    "clojure -X:socketserver :port 1337"
 				                 "java -jar clojure.jar"
 				                 "clojure")))
 ~~~
 
-When running `run-clojure-command` with this `.dir-locals.el` you will be able to:
+When using `Control-c Control-z` with this `.dir-locals.el` you will be able to:
 
 * Press enter to immediately use the first option `clj -A:test`
 * Browse other options with up and down arrow keys.
   * All previously used REPL launching commands are available as options after browsing past the last item in your .dir-locals.el
 * Search for a command in your .dir-locals.el and command history with `Option-r`
+
+`Control-z` will automatically launch a REPL with the first defined command in the loaded `.dir-locals.el`
 
 ## .dir-locals.el Location
 
@@ -89,30 +91,30 @@ TODO: Replace emacs function name with simple description
 
 ## Clojure
      
-| Hotkey        | Function                         |
-| ---           | ---                              |
-| C-z           | (run-lisp "clojure")             |
-| C-c C-z       | run-clojure-command              |
-| C-:           | clojure-toggle-keyword-string    |
-| C-c \<space\> | clojure-align                    |
-| C-M-x         | lisp-eval-defun                  |
-| C-x C-e       | lisp-eval-last-sexp              |
-| C-c C-e       | lisp-eval-last-sexp              |
-| C-c C-r       | lisp-eval-region                 |
-| C-x C-e       | lisp-eval-last-sexp              |
-| C-c C-a       | lisp-show-arglist                |
-| C-c C-c       | lisp-compile-defun               |
-| C-c C-d       | lisp-describe-sym                |
-| C-c C-e       | lisp-eval-defun                  |
-| C-c C-f       | lisp-show-function-documentation |
-| C-c C-k       | lisp-compile-file                |
-| C-c C-l       | lisp-load-file                   |
-| C-c C-n       | lisp-eval-form-and-next          |
-| C-c C-p       | lisp-eval-paragraph              |
-| C-c C-r       | lisp-eval-region                 |
-| C-c C-v       | lisp-show-variable-documentation |
-| C-M-x         | lisp-eval-defun                  |
-| C-M-q         | indent-sexp                      |
+| Hotkey        | Function                                              |
+| ---           | ---                                                   |
+| C-z           | Start REPL with first .dir-locals value, or "clojure" |
+| C-c C-z       | Start REPL, prompt for command                        |
+| C-:           | clojure-toggle-keyword-string                         |
+| C-c \<space\> | clojure-align                                         |
+| C-M-x         | lisp-eval-defun                                       |
+| C-x C-e       | lisp-eval-last-sexp                                   |
+| C-c C-e       | lisp-eval-last-sexp                                   |
+| C-c C-r       | lisp-eval-region                                      |
+| C-x C-e       | lisp-eval-last-sexp                                   |
+| C-c C-a       | lisp-show-arglist                                     |
+| C-c C-c       | lisp-compile-defun                                    |
+| C-c C-d       | lisp-describe-sym                                     |
+| C-c C-e       | lisp-eval-defun                                       |
+| C-c C-f       | lisp-show-function-documentation                      |
+| C-c C-k       | lisp-compile-file                                     |
+| C-c C-l       | lisp-load-file                                        |
+| C-c C-n       | lisp-eval-form-and-next                               |
+| C-c C-p       | lisp-eval-paragraph                                   |
+| C-c C-r       | lisp-eval-region                                      |
+| C-c C-v       | lisp-show-variable-documentation                      |
+| C-M-x         | lisp-eval-defun                                       |
+| C-M-q         | indent-sexp                                           |
 
 # Package Sources
 
