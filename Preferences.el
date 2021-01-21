@@ -39,7 +39,7 @@
 
 (eval-after-load 'clojure-mode
   '(progn
-     (define-key paredit-mode-map (kbd "C-c C-z") 'run-clojure-command)
+     (define-key paredit-mode-map (kbd "C-c C-z") 'run-clojure)
      (define-key paredit-mode-map (kbd "C-z") 'run-clojure-no-prompt)
      (define-key paredit-mode-map (kbd "C-M-x") 'lisp-eval-defun) ;; primary eval mode
      (define-key paredit-mode-map (kbd "C-c C-e") 'lisp-eval-defun)
@@ -78,14 +78,18 @@
       (run-clojure-command (car clj-repl-command))
     (run-clojure-command "clojure")))
 
+(defun run-clojure (cmd)
+  (interactive (list
+                (if (boundp 'clj-repl-command)
+                    (let ((first-command (car clj-repl-command))
+                          (rest-commands (if clj-repl-command-history
+						                     (append (cdr clj-repl-command) clj-repl-command-history)
+						                   (cdr clj-repl-command))))
+                      (read-from-minibuffer "Command:" first-command nil nil 'rest-commands))
+                  (read-from-minibuffer "Command:" "clojure" nil nil 'clj-repl-command-history))))
+  (run-clojure-command cmd))
+
 (defun run-clojure-command (cmd)
-  (interactive (list (if (boundp 'clj-repl-command)
-                         (let ((first-command (car clj-repl-command))
-                               (rest-commands (if clj-repl-command-history
-						                          (append (cdr clj-repl-command) clj-repl-command-history)
-						                        (cdr clj-repl-command))))
-                           (read-from-minibuffer "Command:" first-command nil nil 'rest-commands))
-                       (read-from-minibuffer "Command:" "clojure" nil nil 'clj-repl-command-history))))
   (let ((dd (if (and (fboundp 'clojure-project-root-path)
                      (stringp (clojure-project-root-path)))
 			    (clojure-project-root-path)
