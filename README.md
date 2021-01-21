@@ -62,10 +62,6 @@ TODO: Replace emacs function name with simple description
 | M-\<up\>      | backward-up-list            |
 | M-\<down\>    | down-list                   |
 | \<A-return\>  | paredit-newline             |
-| M-\<right\>   | paredit-forward             |
-| M-\<left\>    | paredit-backward            |
-| M-\<up\>      | paredit-backward-up         |
-| M-\<down\>    | paredit-forward-down        |
 | M-q           | paredit-reindent-defun      |
 | C-\<left\>    | paredit-forward-barf-sexp   |
 | C-M-\<right\> | paredit-backward-barf-sexp  |
@@ -101,6 +97,5 @@ TODO: Replace emacs function name with simple description
 | C-c C-p       | lisp-eval-paragraph              |
 | C-c C-r       | lisp-eval-region                 |
 | C-c C-v       | lisp-show-variable-documentation |
-| C-c C-z       | run-clojure                      |
 | C-M-x         | lisp-eval-defun                  |
 | C-M-q         | indent-sexp                      |
