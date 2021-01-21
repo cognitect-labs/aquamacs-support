@@ -31,6 +31,7 @@
      (define-key paredit-mode-map (kbd "C-S-k") 'paredit-kill-backward)
      (define-key paredit-mode-map (kbd "M-[") 'paredit-wrap-square)
      (define-key paredit-mode-map (kbd "M-{") 'paredit-wrap-curly)
+     (define-key paredit-mode-map (kbd "M-(") 'paredit-wrap-round)
      (define-key paredit-mode-map (kbd "M-<right>") 'forward-sexp)
      (define-key paredit-mode-map (kbd "M-<left>") 'backward-sexp)
      (define-key paredit-mode-map (kbd "M-<up>") 'backward-up-list)
