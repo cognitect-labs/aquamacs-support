@@ -30,16 +30,14 @@ A file named `.dir-locals.el` can be placed anywhere upstream of the file you ru
 
 ~~~
 (clojure-mode (clj-repl-command "clojure -A:dev"
-    "clojure -X:socketserver :port 1337"
-				                 "java -jar clojure.jar"
-				                 "clojure"))
+                                "clojure -A:test"))
 ~~~
 
 When using `Control-c Control-z` with this `.dir-locals.el` you will be able to:
 
 * Press enter to immediately use the first option `clj -A:test`
 * Browse other options with up and down arrow keys.
-  * All previously used REPL launching commands are available as options after browsing past the last item in your .dir-locals.el
+  * All previously used REPL launching commands are available as options after browsing past your `.dir-locals.el` provided commands.
 * Search for a command in your .dir-locals.el and command history with `Option-r`
 
 `Control-z` will automatically launch a REPL with the first defined command in the loaded `.dir-locals.el`
@@ -122,27 +120,27 @@ Move backward over forms with `Option-left`.
 
 * Ex 3.
   * `(println "1 + 2 = " (+ 1 2)❚)`
-  *`(println "1 + 2 = " ❚(+ 1 2))` 
+  * `(println "1 + 2 = " ❚(+ 1 2))` 
 
 Move into the next form of forms (??) with `Option-down`
 
 * Ex 1.
-  * `❚(println "1 + 2 = " (+ 1 2))*`
-  * `(❚println "1 + 2 = " (+ 1 2))*`
+  * `❚(println "1 + 2 = " (+ 1 2))`
+  * `(❚println "1 + 2 = " (+ 1 2))`
 
 * Ex 2.
-  * `(❚println "1 + 2 = " (+ 1 2))*`
-  * `(println "1 + 2 = " (❚+ 1 2))*`
+  * `(❚println "1 + 2 = " (+ 1 2))`
+  * `(println "1 + 2 = " (❚+ 1 2))`
 
 Move out of the current containing form (??) with `Option-up`
 
 * Ex 1.
-  * `(println "1 + 2 = " (+ 1❚ 2))*`
-  * `(println "1 + 2 = " ❚(+ 1 2))*`
+  * `(println "1 + 2 = " (+ 1❚ 2))`
+  * `(println "1 + 2 = " ❚(+ 1 2))`
 
 * Ex 2.
-  * `(println "1 + 2 = " ❚(+ 1 2))*`
-  * `❚(println "1 + 2 = " (+ 1 2))*`
+  * `(println "1 + 2 = " ❚(+ 1 2))`
+  * `❚(println "1 + 2 = " (+ 1 2))`
 
 ### Create Structure
 
