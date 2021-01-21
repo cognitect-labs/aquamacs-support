@@ -42,7 +42,7 @@
 (eval-after-load 'clojure-mode
   '(progn
      (define-key paredit-mode-map (kbd "C-c C-z") 'run-clojure-command)
-     (define-key paredit-mode-map (kbd "C-z") '(lambda () (run-lisp "clojure")))
+     (define-key paredit-mode-map (kbd "C-z") '(lambda () (interactive) (run-clojure-command "clojure")))
      (define-key paredit-mode-map (kbd "C-M-x") 'lisp-eval-defun) ;; primary eval mode
      (define-key paredit-mode-map (kbd "C-c C-e") 'lisp-eval-defun)
      (define-key paredit-mode-map (kbd "C-x C-e") 'lisp-eval-last-sexp)
