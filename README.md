@@ -73,6 +73,7 @@ TODO: Replace emacs function name with simple description
 | ---           | ---                         |
 | M-[           | paredit-wrap-square         |
 | M-{           | paredit-wrap-curly          |
+| M-(           | paredit-wrap-round          |
 | M-\<right\>   | forward-sexp                |
 | M-\<left\>    | backward-sexp               |
 | M-\<up\>      | backward-up-list            |
