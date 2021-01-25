@@ -94,57 +94,128 @@ The examples indicate the cursor with a `❚`.
 
 The navigation commands can be accompanied by the `Shift` key to make a selection from the starting cursor location to the ending cursor location. Using `Shift` is most common for selecting forms with `Option-Shift-right` and `Option-Shift-left`.
 
+Paredit has many quick shortcuts, but they can be daunting to remember while you are learning. __Most structural editing can be accomplished by selecting a form, then using your clipboard and cursor movement to do something with it__.
+
 Move forward over forms with `Option-right`.
 
 * Ex 1.
-  * `❚(println "1 + 2 = " (+ 1 2))`
-  * `(println "1 + 2 = " (+ 1 2))❚`
+  * `❚(println "1 + 2 =" (+ 1 2))`
+  * `(println "1 + 2 =" (+ 1 2))❚`
 
 * Ex 2.
-  * `(❚println "1 + 2 = " (+ 1 2))`
-  * `(println❚ "1 + 2 = " (+ 1 2))`
+  * `(❚println "1 + 2 =" (+ 1 2))`
+  * `(println❚ "1 + 2 =" (+ 1 2))`
 
 * Ex 3.
-  * `(println "1 + 2 = " ❚(+ 1 2))`
-  * `(println "1 + 2 = " (+ 1 2)❚)`
+  * `(println "1 + 2 =" ❚(+ 1 2))`
+  * `(println "1 + 2 =" (+ 1 2)❚)`
 
 Move backward over forms with `Option-left`.
 
 * Ex 1.
-  * `(println "1 + 2 = " (+ 1 2))❚`
-  * `❚(println "1 + 2 = " (+ 1 2))`
+  * `(println "1 + 2 =" (+ 1 2))❚`
+  * `❚(println "1 + 2 =" (+ 1 2))`
 
 * Ex 2.
-  * `(println "1 + 2 = "❚ (+ 1 2))`
-  * `(println ❚"1 + 2 = " (+ 1 2))` 
+  * `(println "1 + 2 ="❚ (+ 1 2))`
+  * `(println ❚"1 + 2 =" (+ 1 2))` 
 
 * Ex 3.
-  * `(println "1 + 2 = " (+ 1 2)❚)`
-  * `(println "1 + 2 = " ❚(+ 1 2))` 
+  * `(println "1 + 2 =" (+ 1 2)❚)`
+  * `(println "1 + 2 =" ❚(+ 1 2))` 
 
 Move into the next form of forms (??) with `Option-down`
 
 * Ex 1.
-  * `❚(println "1 + 2 = " (+ 1 2))`
-  * `(❚println "1 + 2 = " (+ 1 2))`
+  * `❚(println "1 + 2 =" (+ 1 2))`
+  * `(❚println "1 + 2 =" (+ 1 2))`
 
 * Ex 2.
-  * `(❚println "1 + 2 = " (+ 1 2))`
-  * `(println "1 + 2 = " (❚+ 1 2))`
+  * `(❚println "1 + 2 =" (+ 1 2))`
+  * `(println "1 + 2 =" (❚+ 1 2))`
 
 Move out of the current containing form (??) with `Option-up`
 
 * Ex 1.
-  * `(println "1 + 2 = " (+ 1❚ 2))`
-  * `(println "1 + 2 = " ❚(+ 1 2))`
+  * `(println "1 + 2 =" (+ 1❚ 2))`
+  * `(println "1 + 2 =" ❚(+ 1 2))`
 
 * Ex 2.
-  * `(println "1 + 2 = " ❚(+ 1 2))`
-  * `❚(println "1 + 2 = " (+ 1 2))`
+  * `(println "1 + 2 =" ❚(+ 1 2))`
+  * `❚(println "1 + 2 =" (+ 1 2))`
 
 ### Create Structure
 
+Creating structure is simple as inserting a delimiter like `()`. There are two ways to do this.
+
+Insert a new delimiter with `(`, `[`, `{` or `"`.
+
+* Ex 1.
+  * `(println "1 + 2 = " ❚(+ 1 2))`
+  * `(println "1 + 2 = " ()❚(+ 1 2))`
+
+* Ex 2.
+  * `(println "1 + 2 = " ❚(+ 1 2))`
+  * `(println "1 + 2 = " ""❚(+ 1 2))`
+  
+Wrap the next form with a delimiter using `Option-(`, `Option-[` or `
+
+* Ex 1.
+  * `(println "1 + 2 = " ❚(+ 1 2))`
+  * `(println "1 + 2 = " (❚(+ 1 2)))`
+
 ### Edit Structure
+
+It is tempting to try to delete single delimiters. Deleting a single delimiter will unbalance your code structure. The desire to delete a delimiter indicates that you are trying to change your code structure, and Paredit offers a number of functions that are more efficient and safer than attempting to manually move delimiters.
+
+All of these functions can be replicated by using `shift-option-right` or `shift-option-left` to select the next or previous form. Once a form is selected you can delete it and create new structure, or you can cut it and paste it elsewhere.
+
+`Control` with left and right arrow keys controls the leftmost outer delimiter of the current surrounding form. 
+
+Bring the next form into the current form with `Control-right`. This moves the outermost surrounded delimiter _on the right_, to the right.
+
+* Ex 1.
+  * `(❚)(println "1 + 2 = " (+ 1 2))`
+  * `(❚(println "1 + 2 = " (+ 1 2)))`
+
+* Ex 2.
+  * `(println "1 + 2 = " (❚+ 1) 2)`
+  * `(println "1 + 2 = " (❚+ 1 2))`
+
+Move the next form out of the current form with `Control-left`. This moves the outermost surrounded delimiter _on the right_, to the left.
+
+* Ex 1.
+  * `(❚(println "1 + 2 = " (+ 1 2)))`
+  * `(❚)(println "1 + 2 = " (+ 1 2))`
+  
+* Ex 2.
+  * `(println "1 + 2 = " (❚+ 1 2))`
+  * `(println "1 + 2 = " (❚+ 1) 2)`
+
+`Control-option` with left and right arrow keys controls the rightmost outer delimiter of the current surrounding form. 
+
+Bring the previous form into the current form with `Control-option-right`. This moves the outermost surrounded delimiter _on the left_, to the left.
+
+* Ex 1.
+  * `((println "1 + 2 = " (+ 1 2))❚)`
+  * `(println "1 + 2 = " (+ 1 2))(❚)`
+
+* Ex 2.
+  * `(println "1 + 2 = " (❚+ 1 2))`
+  * `(println "1 + 2 = " ❚+ (1 2)`
+
+Move the previous form out of the current form with `Control-option-left`. This moves the outermost surrounded delimiter _on the left_, to the right.
+
+* Ex 1.
+  * `((println "1 + 2 = " (+ 1 2))❚)`
+  * `(println "1 + 2 = " (+ 1 2))()`
+
+* Ex 2.
+  * `(println "1 + 2 = " (+ ❚1 2))`
+  * `(println "1 + 2 = " + (❚1 2))`
+  
+  
+ **TODO** - Splice, Split, kill, reindent
 
 # Features
 
