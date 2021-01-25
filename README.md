@@ -64,11 +64,11 @@ Paredit allows you to edit and navigate Clojure code in a regular and predictabl
 
 Code:
 
-`(println "1 + 2 = " (+ 1 2))`
+`(println "1 + 2 =" (+ 1 2))`
 
 Forms:
 
-* `(println "1 + 2 = " (+ 1 2))`
+* `(println "1 + 2 =" (+ 1 2))`
   * `println`
   * `"1 + 2 = "`
   * `(+ 1 2)`
@@ -78,19 +78,33 @@ Forms:
   
 Each data structure is a form, and each atomic unit is a form. This relationship allows for editing and navigation that acts on the structure of the code. Structured editing differs from editing systems that need to understand what the code _means_ to act in a logical manner.
 
-Paredit expects all of your delimiters (`()`, `[]` `{}`) to be in matching pairs. If you use Paredit for your code editing and restructuring, then your code will remain structured. 
-
-(TODO: Rephrase previous sentence. It is technically incorrect. `Option-Shift-up` is a counter example, since it will usually select a single delimiter)
+Paredit expects all of your delimiters (`()`, `[]` `{}`) to be in matching pairs. With very few exceptions, if you use Paredit for your code editing and restructuring, then your code will remain structured. 
 
 ## Using Paredit
 
-Paredit's commands offer 3 types of operation: moving the cursor, creating structure, and changing the structure of code.
+Paredit's commands offer 3 types of operation: creating structure, navigating structure and changing the structure of code.
 
 The examples indicate the cursor with a `❚`.
 
-### Navigation
-
 **TODO** - These are best presented as _slow_ and deliberate animations. Current sources utilize fast-moving and confusing code screen-caps.
+
+### Create Structure
+
+Creating structure is simple as inserting a delimiter like `()`. There are two ways to do this.
+
+Insert a new delimiter with `(`, `[`, `{` or `"`
+
+* Ex 1.
+  *  `❚`
+  * `(❚)`
+
+Wrap the next form with a delimiter using `Option-(`, `Option-[` or `
+
+* Ex 1.
+  * `(println "1 + 2 =" ❚(+ 1 2))`
+  * `(println "1 + 2 =" (❚(+ 1 2)))`
+
+### Navigation
 
 The navigation commands can be accompanied by the `Shift` key to make a selection from the starting cursor location to the ending cursor location. Using `Shift` is most common for selecting forms with `Option-Shift-right` and `Option-Shift-left`.
 
@@ -144,25 +158,23 @@ Move out of the current containing form (??) with `Option-up`
   * `(println "1 + 2 =" ❚(+ 1 2))`
   * `❚(println "1 + 2 =" (+ 1 2))`
 
-### Create Structure
+Move after the pressed delimiter to the right. Inside a double quote, only `"` works, and only when the cursor is next to a double quote.
 
-Creating structure is simple as inserting a delimiter like `()`. There are two ways to do this.
+* Ex 1. `)`
+  * `(println "1 + 2 =" (+ 1❚ 2))`
+  * `(println "1 + 2 =" (+ 1 2)❚)`
 
-Insert a new delimiter with `(`, `[`, `{` or `"`.
+* Ex 2. `]`
+  * `(let [k ❚(+ 2 2)])`
+  * `(let [k (+ 2 2)]❚)`
 
-* Ex 1.
-  * `(println "1 + 2 =" ❚(+ 1 2))`
-  * `(println "1 + 2 =" ()❚(+ 1 2))`
+* Ex 3. `"`
+  * `(println "1 + 2 =❚" (+ 1 2))`
+  * `(println "1 + 2 ="❚ (+ 1 2))`
 
-* Ex 2.
-  * `(println "1 + 2 =" ❚(+ 1 2))`
-  * `(println "1 + 2 =" ""❚(+ 1 2))`
-  
-Wrap the next form with a delimiter using `Option-(`, `Option-[` or `
-
-* Ex 1.
-  * `(println "1 + 2 =" ❚(+ 1 2))`
-  * `(println "1 + 2 =" (❚(+ 1 2)))`
+* Ex 4. `"`
+  * `(println "1 +❚ 2 =" (+ 1 2))`
+  * `(println "1 +\"❚ 2 =" (+ 1 2))`
 
 ### Edit Structure
 
@@ -170,51 +182,37 @@ It is tempting to try to delete single delimiters. Deleting a single delimiter w
 
 All of these functions can be replicated by using `shift-option-right` or `shift-option-left` to select the next or previous form. Once a form is selected you can delete it and create new structure, or you can cut it and paste it elsewhere.
 
-`Control` with left and right arrow keys controls the leftmost outer delimiter of the current surrounding form. 
+`Control` with left and right arrow keys controls the rightmost outer delimiter of the current surrounding form. 
+
+`Control-Option` with left and right arrow keys controls the leftmost outer delimiter of the current surrounding form. 
 
 Bring the next form into the current form with `Control-right`. This moves the outermost surrounded delimiter _on the right_, to the right.
 
-* Ex 1.
-  * `(❚)(println "1 + 2 =" (+ 1 2))`
-  * `(❚(println "1 + 2 =" (+ 1 2)))`
-
-* Ex 2.
-  * `(println "1 + 2 =" (❚+ 1) 2)`
-  * `(println "1 + 2 =" (❚+ 1 2))`
+* Ex 1. Adding the form to the right to the current form
+  * `(str "Hello"❚) "World"`
+  * `(str "Hello"❚ "World)`
 
 Move the next form out of the current form with `Control-left`. This moves the outermost surrounded delimiter _on the right_, to the left.
 
-* Ex 1.
-  * `(❚(println "1 + 2 =" (+ 1 2)))`
-  * `(❚)(println "1 + 2 =" (+ 1 2))`
+* Ex 1. Move the following form out of the current form.
+  * `(when (enthusiastic-greet?) (println "Hello!")❚ (println "How are you?"))`
+  * `(when (enthusiastic-greet?) (println "Hello!")❚) (println "How are you?")`
   
-* Ex 2.
-  * `(println "1 + 2 =" (❚+ 1 2))`
-  * `(println "1 + 2 =" (❚+ 1) 2)`
-
 `Control-option` with left and right arrow keys controls the rightmost outer delimiter of the current surrounding form. 
 
 Bring the previous form into the current form with `Control-option-right`. This moves the outermost surrounded delimiter _on the left_, to the left.
 
-* Ex 1.
-  * `((println "1 + 2 =" (+ 1 2))❚)`
-  * `(println "1 + 2 =" (+ 1 2))(❚)`
-
-* Ex 2.
-  * `(println "1 + 2 =" (❚+ 1 2))`
-  * `(println "1 + 2 =" ❚+ (1 2)`
+* Ex 1. Push the form to the left out of the current form. (Rarely used)
+  * `(defn simple-vector [] ["Return simple vector" ❚1 2 3])`
+  * `(defn simple-vector [] "Return simple vector" [❚1 2 3])`
 
 Move the previous form out of the current form with `Control-option-left`. This moves the outermost surrounded delimiter _on the left_, to the right.
 
-* Ex 1.
-  * `((println "1 + 2 =" (+ 1 2))❚)`
-  * `(println "1 + 2 =" (+ 1 2))()`
-
-* Ex 2.
-  * `(println "1 + 2 =" (+ ❚1 2))`
-  * `(println "1 + 2 =" + (❚1 2))`
+* Ex 1. Add the form on the left to the current form. (Rarely used)
+  * `(str (this) "❚is a form")`
+  * `(str "(this) ❚is a form")`
   
-Insert a `)` and a `(` around the cursor to split the current form with `Option-Shift-s`.
+Split the current form with `Option-Shift-s`.
 
 * Ex 1.
   * `(println "1 + 2 =" (+ ❚1 2))`
