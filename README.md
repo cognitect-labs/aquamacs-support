@@ -214,8 +214,43 @@ Move the previous form out of the current form with `Control-option-left`. This 
   * `(println "1 + 2 = " (+ ❚1 2))`
   * `(println "1 + 2 = " + (❚1 2))`
   
+Insert a `)` and a `(` around the cursor to split the current form with `Option-Shift-s`.
+
+* Ex 1.
+  * `(println "1 + 2 = " (+ ❚1 2))`
+  * `(println "1 + 2 = " (+)❚ (1 2)`
   
- **TODO** - Splice, Split, kill, reindent
+ Remove the nearest surrounding `(` and `)` with `Option-s`
+
+* Ex 1.
+  * `(println "1 + 2 = " (+ ❚1 2))`
+  * `(println "1 + 2 = " + ❚1 2)`
+
+Delete everything to the right of the cursor without unbalancing the current form with `Control-k`
+
+* Ex 1.
+  * `(println "1 + 2 = " ❚(+ 1 2))`
+  * `(println "1 + 2 = " ❚)`
+
+* Ex 2.
+  * `(❚println "1 + 2 = " (+ 1 2))`
+  * `(❚)`
+  
+* Ex 3.
+  * `❚(println "1 + 2 = " (+ 1 2))`
+  * `❚`
+  
+Reindent the outermost form with `Alt-q`
+
+* Ex 1.
+  * ~~~
+    (println 
+        ❚"1 + 2 = " 
+           (+ 1 2))
+  * ~~~
+    (println 
+    ❚"1 + 2 = " 
+     (+ 1 2))
 
 # Features
 
@@ -253,7 +288,7 @@ TODO: Replace emacs function name with simple description
      
 | Hotkey              | Function                                              |
 | ---                 | ---                                                   |
-| Control-z           | Start REPL with first .dir-locals value, or "clojure" |
+| Control-z           | Start REPL with first .dir-locals value, or clojure" |
 | Control-c Control-z | Start REPL, prompt for command                        |
 | Control-:           | clojure-toggle-keyword-string                         |
 | Control-c \<space\> | clojure-align                                         |

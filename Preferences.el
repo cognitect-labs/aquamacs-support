@@ -28,7 +28,7 @@
      (define-key paredit-mode-map (kbd "M-S-s") 'paredit-split-sexp)
      (define-key paredit-mode-map (kbd "M-s") 'paredit-splice-sexp)
      (define-key paredit-mode-map (kbd "C-k") 'paredit-kill)
-     (define-key paredit-mode-map (kbd "C-S-k") 'paredit-kill-backward)
+     (define-key paredit-mode-map (kbd "C-S-k") 'paredit-kill-backward) ;; Does not exist! 
      (define-key paredit-mode-map (kbd "M-[") 'paredit-wrap-square)
      (define-key paredit-mode-map (kbd "M-{") 'paredit-wrap-curly)
      (define-key paredit-mode-map (kbd "M-(") 'paredit-wrap-round)
