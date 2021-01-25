@@ -151,18 +151,18 @@ Creating structure is simple as inserting a delimiter like `()`. There are two w
 Insert a new delimiter with `(`, `[`, `{` or `"`.
 
 * Ex 1.
-  * `(println "1 + 2 = " ❚(+ 1 2))`
-  * `(println "1 + 2 = " ()❚(+ 1 2))`
+  * `(println "1 + 2 =" ❚(+ 1 2))`
+  * `(println "1 + 2 =" ()❚(+ 1 2))`
 
 * Ex 2.
-  * `(println "1 + 2 = " ❚(+ 1 2))`
-  * `(println "1 + 2 = " ""❚(+ 1 2))`
+  * `(println "1 + 2 =" ❚(+ 1 2))`
+  * `(println "1 + 2 =" ""❚(+ 1 2))`
   
 Wrap the next form with a delimiter using `Option-(`, `Option-[` or `
 
 * Ex 1.
-  * `(println "1 + 2 = " ❚(+ 1 2))`
-  * `(println "1 + 2 = " (❚(+ 1 2)))`
+  * `(println "1 + 2 =" ❚(+ 1 2))`
+  * `(println "1 + 2 =" (❚(+ 1 2)))`
 
 ### Edit Structure
 
@@ -175,69 +175,69 @@ All of these functions can be replicated by using `shift-option-right` or `shift
 Bring the next form into the current form with `Control-right`. This moves the outermost surrounded delimiter _on the right_, to the right.
 
 * Ex 1.
-  * `(❚)(println "1 + 2 = " (+ 1 2))`
-  * `(❚(println "1 + 2 = " (+ 1 2)))`
+  * `(❚)(println "1 + 2 =" (+ 1 2))`
+  * `(❚(println "1 + 2 =" (+ 1 2)))`
 
 * Ex 2.
-  * `(println "1 + 2 = " (❚+ 1) 2)`
-  * `(println "1 + 2 = " (❚+ 1 2))`
+  * `(println "1 + 2 =" (❚+ 1) 2)`
+  * `(println "1 + 2 =" (❚+ 1 2))`
 
 Move the next form out of the current form with `Control-left`. This moves the outermost surrounded delimiter _on the right_, to the left.
 
 * Ex 1.
-  * `(❚(println "1 + 2 = " (+ 1 2)))`
-  * `(❚)(println "1 + 2 = " (+ 1 2))`
+  * `(❚(println "1 + 2 =" (+ 1 2)))`
+  * `(❚)(println "1 + 2 =" (+ 1 2))`
   
 * Ex 2.
-  * `(println "1 + 2 = " (❚+ 1 2))`
-  * `(println "1 + 2 = " (❚+ 1) 2)`
+  * `(println "1 + 2 =" (❚+ 1 2))`
+  * `(println "1 + 2 =" (❚+ 1) 2)`
 
 `Control-option` with left and right arrow keys controls the rightmost outer delimiter of the current surrounding form. 
 
 Bring the previous form into the current form with `Control-option-right`. This moves the outermost surrounded delimiter _on the left_, to the left.
 
 * Ex 1.
-  * `((println "1 + 2 = " (+ 1 2))❚)`
-  * `(println "1 + 2 = " (+ 1 2))(❚)`
+  * `((println "1 + 2 =" (+ 1 2))❚)`
+  * `(println "1 + 2 =" (+ 1 2))(❚)`
 
 * Ex 2.
-  * `(println "1 + 2 = " (❚+ 1 2))`
-  * `(println "1 + 2 = " ❚+ (1 2)`
+  * `(println "1 + 2 =" (❚+ 1 2))`
+  * `(println "1 + 2 =" ❚+ (1 2)`
 
 Move the previous form out of the current form with `Control-option-left`. This moves the outermost surrounded delimiter _on the left_, to the right.
 
 * Ex 1.
-  * `((println "1 + 2 = " (+ 1 2))❚)`
-  * `(println "1 + 2 = " (+ 1 2))()`
+  * `((println "1 + 2 =" (+ 1 2))❚)`
+  * `(println "1 + 2 =" (+ 1 2))()`
 
 * Ex 2.
-  * `(println "1 + 2 = " (+ ❚1 2))`
-  * `(println "1 + 2 = " + (❚1 2))`
+  * `(println "1 + 2 =" (+ ❚1 2))`
+  * `(println "1 + 2 =" + (❚1 2))`
   
 Insert a `)` and a `(` around the cursor to split the current form with `Option-Shift-s`.
 
 * Ex 1.
-  * `(println "1 + 2 = " (+ ❚1 2))`
-  * `(println "1 + 2 = " (+)❚ (1 2)`
+  * `(println "1 + 2 =" (+ ❚1 2))`
+  * `(println "1 + 2 =" (+)❚ (1 2)`
   
  Remove the nearest surrounding `(` and `)` with `Option-s`
 
 * Ex 1.
-  * `(println "1 + 2 = " (+ ❚1 2))`
-  * `(println "1 + 2 = " + ❚1 2)`
+  * `(println "1 + 2 =" (+ ❚1 2))`
+  * `(println "1 + 2 =" + ❚1 2)`
 
 Delete everything to the right of the cursor without unbalancing the current form with `Control-k`
 
 * Ex 1.
-  * `(println "1 + 2 = " ❚(+ 1 2))`
-  * `(println "1 + 2 = " ❚)`
+  * `(println "1 + 2 =" ❚(+ 1 2))`
+  * `(println "1 + 2 =" ❚)`
 
 * Ex 2.
-  * `(❚println "1 + 2 = " (+ 1 2))`
+  * `(❚println "1 + 2 =" (+ 1 2))`
   * `(❚)`
   
 * Ex 3.
-  * `❚(println "1 + 2 = " (+ 1 2))`
+  * `❚(println "1 + 2 =" (+ 1 2))`
   * `❚`
   
 Reindent the outermost form with `Alt-q`
