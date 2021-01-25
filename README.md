@@ -71,10 +71,10 @@ Forms:
 * `(println "1 + 2 = " (+ 1 2))`
   * `println`
   * `"1 + 2 = "`
-* `(+ 1 2)`
-  * `+`
-  * `1`
-  * `2`
+  * `(+ 1 2)`
+    * `+`
+    * `1`
+    * `2`
   
 Each data structure is a form, and each atomic unit is a form. This relationship allows for editing and navigation that acts on the structure of the code. Structured editing differs from editing systems that need to understand what the code _means_ to act in a logical manner.
 
