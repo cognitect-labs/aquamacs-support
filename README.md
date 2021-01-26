@@ -214,15 +214,40 @@ Move the previous form out of the current form with `Control-option-left`. This 
   
 Split the current form with `Option-Shift-s`.
 
-* Ex 1.
-  * `(println "1 + 2 =" (+ ❚1 2))`
-  * `(println "1 + 2 =" (+)❚ (1 2)`
+* Ex 1. Turn one data structure into two.
+  * `(map + [1 2❚ 3 4])`
+  * `(map + [1 2]❚ [3 4])`
   
  Remove the nearest surrounding `(` and `)` with `Option-s`
 
+* Ex 1. 
+  * `[1 2 [3❚ 4]]`
+  * `[1 2 3❚ 4]`
+
+  
+Reindent the outermost form with `Alt-q`
+
 * Ex 1.
-  * `(println "1 + 2 =" (+ ❚1 2))`
-  * `(println "1 + 2 =" + ❚1 2)`
+  * ~~~
+    (defn calculate-tax [state item-cost]
+    (let [rate (case state
+    :Florida 0.06
+    :Wyoming 0.04
+             ❚0.0)]
+       (* rate item-cost)))
+  * ~~~
+    (defn calculate-tax [state item-cost]
+      (let [rate (case state
+                   :Florida 0.06
+                   :Wyoming 0.04
+                   ❚0.0)]
+        (* rate item-cost)))
+        
+#### Deleting
+
+Paredit tries to prevent you from unbalancing your forms. This can lead to situations where it appears that your backspace or delete key does not work. Using backspace over a right parenthesis will move the cursor instead of deleting something.
+
+Think about editing code in terms of adding, moving and deleting forms rather than adding, moving and deleting characters. When in doubt use `Option-Shift-left` and `Option-Shift-right` to select a form, then the `Delete` key (not backspace!) to delete it.
 
 Delete everything to the right of the cursor without unbalancing the current form with `Control-k`
 
@@ -237,18 +262,6 @@ Delete everything to the right of the cursor without unbalancing the current for
 * Ex 3.
   * `❚(println "1 + 2 =" (+ 1 2))`
   * `❚`
-  
-Reindent the outermost form with `Alt-q`
-
-* Ex 1.
-  * ~~~
-    (println 
-        ❚"1 + 2 = " 
-           (+ 1 2))
-  * ~~~
-    (println 
-    ❚"1 + 2 = " 
-     (+ 1 2))
 
 # Features
 
