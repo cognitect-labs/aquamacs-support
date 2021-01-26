@@ -40,7 +40,7 @@ When using `Control-c Control-z` with this `.dir-locals.el` you will be able to:
   * All previously used REPL launching commands are available as options after browsing past your `.dir-locals.el` provided commands.
 * Search for a command in your .dir-locals.el and command history with `Option-r`
 
-`Control-z` will automatically launch a REPL with the first defined command in the loaded `.dir-locals.el`, or `clojure` if `.dir-locals.el` is not found.
+`C-z` will automatically launch a REPL with the first defined command in the loaded `.dir-locals.el`, or `clojure` if `.dir-locals.el` is not found.
 
 ## .dir-locals.el Location
 
@@ -86,7 +86,15 @@ Paredit's commands offer 3 types of operation: creating structure, navigating st
 
 The examples indicate the cursor with a `❚`.
 
-**TODO** - These are best presented as _slow_ and deliberate animations. Current sources utilize fast-moving and confusing code screen-caps.
+| Abbreviation | Key     |
+| ---          | ---     |
+| M-           | Option  |
+| C-           | Control |
+| S-           | Shift   |
+| s-           | Command |
+
+
+**TODO** - These are best presented as _slow_ and deliberate animations, or embedded editor with paredit.js. Current sources utilize fast-moving and confusing code screen-caps.
 
 ### Create Structure
 
@@ -98,7 +106,7 @@ Insert a new delimiter with `(`, `[`, `{` or `"`
   *  `❚`
   * `(❚)`
 
-Wrap the next form with a delimiter using `Option-(`, `Option-[` or `
+Wrap the next form with a delimiter using `M-(`, `M-[` or `
 
 * Ex 1.
   * `(println "1 + 2 =" ❚(+ 1 2))`
@@ -106,11 +114,11 @@ Wrap the next form with a delimiter using `Option-(`, `Option-[` or `
 
 ### Navigation
 
-The navigation commands can be accompanied by the `Shift` key to make a selection from the starting cursor location to the ending cursor location. Using `Shift` is most common for selecting forms with `Option-Shift-right` and `Option-Shift-left`.
+The navigation commands can be accompanied by the `Shift` key to make a selection from the starting cursor location to the ending cursor location. Using `Shift` is most common for selecting forms with `M-S-right` and `M-S-left`.
 
 Paredit has many quick shortcuts, but they can be daunting to remember while you are learning. __Most structural editing can be accomplished by selecting a form, then using your clipboard and cursor movement to do something with it__.
 
-Move forward over forms with `Option-right`.
+Move forward over forms with `M-right`.
 
 * Ex 1.
   * `❚(println "1 + 2 =" (+ 1 2))`
@@ -124,7 +132,7 @@ Move forward over forms with `Option-right`.
   * `(println "1 + 2 =" ❚(+ 1 2))`
   * `(println "1 + 2 =" (+ 1 2)❚)`
 
-Move backward over forms with `Option-left`.
+Move backward over forms with `M-left`.
 
 * Ex 1.
   * `(println "1 + 2 =" (+ 1 2))❚`
@@ -138,7 +146,7 @@ Move backward over forms with `Option-left`.
   * `(println "1 + 2 =" (+ 1 2)❚)`
   * `(println "1 + 2 =" ❚(+ 1 2))` 
 
-Move into the next form of forms (??) with `Option-down`
+Move into the next form of forms (??) with `M-down`
 
 * Ex 1.
   * `❚(println "1 + 2 =" (+ 1 2))`
@@ -148,7 +156,7 @@ Move into the next form of forms (??) with `Option-down`
   * `(❚println "1 + 2 =" (+ 1 2))`
   * `(println "1 + 2 =" (❚+ 1 2))`
 
-Move out of the current containing form (??) with `Option-up`
+Move out of the current containing form (??) with `M-up`
 
 * Ex 1.
   * `(println "1 + 2 =" (+ 1❚ 2))`
@@ -184,47 +192,47 @@ All of these functions can be replicated by using `shift-option-right` or `shift
 
 `Control` with left and right arrow keys controls the rightmost outer delimiter of the current surrounding form. 
 
-`Control-Option` with left and right arrow keys controls the leftmost outer delimiter of the current surrounding form. 
+`C-Option` with left and right arrow keys controls the leftmost outer delimiter of the current surrounding form. 
 
-Bring the next form into the current form with `Control-right`. This moves the outermost surrounded delimiter _on the right_, to the right.
+Bring the next form into the current form with `C-right`. This moves the outermost surrounded delimiter _on the right_, to the right.
 
 * Ex 1. Adding the form to the right to the current form
   * `(str "Hello"❚) "World"`
   * `(str "Hello"❚ "World)`
 
-Move the next form out of the current form with `Control-left`. This moves the outermost surrounded delimiter _on the right_, to the left.
+Move the next form out of the current form with `C-left`. This moves the outermost surrounded delimiter _on the right_, to the left.
 
 * Ex 1. Move the following form out of the current form.
   * `(when (enthusiastic-greet?) (println "Hello!")❚ (println "How are you?"))`
   * `(when (enthusiastic-greet?) (println "Hello!")❚) (println "How are you?")`
   
-`Control-option` with left and right arrow keys controls the rightmost outer delimiter of the current surrounding form. 
+`C-option` with left and right arrow keys controls the rightmost outer delimiter of the current surrounding form. 
 
-Bring the previous form into the current form with `Control-option-right`. This moves the outermost surrounded delimiter _on the left_, to the left.
+Bring the previous form into the current form with `C-option-right`. This moves the outermost surrounded delimiter _on the left_, to the left.
 
 * Ex 1. Push the form to the left out of the current form. (Rarely used)
   * `(defn simple-vector [] ["Return simple vector" ❚1 2 3])`
   * `(defn simple-vector [] "Return simple vector" [❚1 2 3])`
 
-Move the previous form out of the current form with `Control-option-left`. This moves the outermost surrounded delimiter _on the left_, to the right.
+Move the previous form out of the current form with `C-option-left`. This moves the outermost surrounded delimiter _on the left_, to the right.
 
 * Ex 1. Add the form on the left to the current form. (Rarely used)
   * `(str (this) "❚is a form")`
   * `(str "(this) ❚is a form")`
   
-Split the current form with `Option-Shift-s`.
+Split the current form with `M-S-s`.
 
 * Ex 1. Turn one data structure into two.
   * `(map + [1 2❚ 3 4])`
   * `(map + [1 2]❚ [3 4])`
 
-Remove the nearest surrounding delimiter with `Option-s`
+Remove the nearest surrounding delimiter with `M-s`
 
 * Ex 1. 
   * `[1 2 [3❚ 4]]`
   * `[1 2 3❚ 4]`
 
-Remove the nearest surrounding delimiter with `Option-s`, and delete everything between the delimiters _except_ the nearest form after the cursor.
+Remove the nearest surrounding delimiter with `M-s`, and delete everything between the delimiters _except_ the nearest form after the cursor.
 
 * Ex 1.
   * `[1 2 [3❚ 4]]`
@@ -234,7 +242,7 @@ Remove the nearest surrounding delimiter with `Option-s`, and delete everything 
   * `(- 1 (* ❚2 3))`
   * `(- 1 ❚2)`
   
-Reindent the outermost form with `Alt-q`
+Reindent the outermost form with `M-q`
 
 * Ex 1.
   * ~~~
@@ -256,9 +264,9 @@ Reindent the outermost form with `Alt-q`
 
 Paredit tries to prevent you from unbalancing your forms. This can lead to situations where it appears that your backspace or delete key does not work, e.g. using backspace over a right parenthesis will move the cursor instead of deleting something.
 
-Think about editing code in terms of adding, moving and deleting forms rather than adding, moving and deleting characters. When in doubt use `Option-Shift-left` and `Option-Shift-right` to select a form, then the `Delete` (not backspace!) or cut it with `Command-x`.
+Think about editing code in terms of adding, moving and deleting forms rather than adding, moving and deleting characters. When in doubt use `M-S-left` and `M-S-right` to select a form, then the `Delete` (not backspace!) or cut it with `Command-x`.
 
-Delete everything to the right of the cursor without unbalancing the current form with `Control-k`
+Delete everything to the right of the cursor without unbalancing the current form with `C-k`
 
 * Ex 1.
   * `(println "1 + 2 =" ❚(+ 1 2))`
