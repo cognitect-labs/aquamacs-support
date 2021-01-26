@@ -40,7 +40,7 @@ When using `Control-c Control-z` with this `.dir-locals.el` you will be able to:
   * All previously used REPL launching commands are available as options after browsing past your `.dir-locals.el` provided commands.
 * Search for a command in your .dir-locals.el and command history with `Option-r`
 
-`Control-z` will automatically launch a REPL with the first defined command in the loaded `.dir-locals.el`
+`Control-z` will automatically launch a REPL with the first defined command in the loaded `.dir-locals.el`, or `clojure` if `.dir-locals.el` is not found.
 
 ## .dir-locals.el Location
 
@@ -249,7 +249,7 @@ Reindent the outermost form with `Alt-q`
       (let [rate (case state
                    :Florida 0.06
                    :Wyoming 0.04
-                   ❚0.0)]
+                  ❚0.0)]
         (* rate item-cost)))
         
 #### Deleting
