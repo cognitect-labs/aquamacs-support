@@ -178,9 +178,9 @@ Move after the pressed delimiter to the right. Inside a double quote, only `"` w
 
 ### Edit Structure
 
-It is tempting to try to delete single delimiters. Deleting a single delimiter will unbalance your code structure. The desire to delete a delimiter indicates that you are trying to change your code structure, and Paredit offers a number of functions that are more efficient and safer than attempting to manually move delimiters.
+It is tempting to try to delete single delimiters to change the structure of your code. The desire to delete a delimiter indicates that you are trying to change your code structure, and Paredit offers a number of functions that are more efficient and safer than attempting to manually move delimiters.
 
-All of these functions can be replicated by using `shift-option-right` or `shift-option-left` to select the next or previous form. Once a form is selected you can delete it and create new structure, or you can cut it and paste it elsewhere.
+All of these functions can be replicated by using `shift-option-right` or `shift-option-left` to select the next or previous form. Once a form is selected then you can delete it and create new structure, or you can cut it and paste it elsewhere.
 
 `Control` with left and right arrow keys controls the rightmost outer delimiter of the current surrounding form. 
 
@@ -254,9 +254,9 @@ Reindent the outermost form with `Alt-q`
         
 #### Deleting
 
-Paredit tries to prevent you from unbalancing your forms. This can lead to situations where it appears that your backspace or delete key does not work. Using backspace over a right parenthesis will move the cursor instead of deleting something.
+Paredit tries to prevent you from unbalancing your forms. This can lead to situations where it appears that your backspace or delete key does not work, e.g. using backspace over a right parenthesis will move the cursor instead of deleting something.
 
-Think about editing code in terms of adding, moving and deleting forms rather than adding, moving and deleting characters. When in doubt use `Option-Shift-left` and `Option-Shift-right` to select a form, then the `Delete` key (not backspace!) to delete it.
+Think about editing code in terms of adding, moving and deleting forms rather than adding, moving and deleting characters. When in doubt use `Option-Shift-left` and `Option-Shift-right` to select a form, then the `Delete` (not backspace!) or cut it with `Command-x`.
 
 Delete everything to the right of the cursor without unbalancing the current form with `Control-k`
 
