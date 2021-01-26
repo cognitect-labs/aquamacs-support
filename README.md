@@ -217,13 +217,22 @@ Split the current form with `Option-Shift-s`.
 * Ex 1. Turn one data structure into two.
   * `(map + [1 2❚ 3 4])`
   * `(map + [1 2]❚ [3 4])`
-  
- Remove the nearest surrounding `(` and `)` with `Option-s`
+
+Remove the nearest surrounding delimiter with `Option-s`
 
 * Ex 1. 
   * `[1 2 [3❚ 4]]`
   * `[1 2 3❚ 4]`
 
+Remove the nearest surrounding delimiter with `Option-s`, and delete everything between the delimiters _except_ the nearest form after the cursor.
+
+* Ex 1.
+  * `[1 2 [3❚ 4]]`
+  * `[1 2 ❚4]`
+
+* Ex 2. Raise a form up a level, deleting its surroundings
+  * `(- 1 (* ❚2 3))`
+  * `(- 1 ❚2)`
   
 Reindent the outermost form with `Alt-q`
 
@@ -291,6 +300,7 @@ TODO: Replace emacs function name with simple description
 | Control-Option-\<left\>  | paredit-backward-slurp-sexp |
 | Option-Shift-s           | paredit-split-sexp          |
 | Option-s                 | paredit-splice-sexp         |
+| Option-r                 | paredit-raise-sexp          |
 | Control-k                | paredit-kill                |
 | Control-Shift-k          | paredit-kill-backward       |
   
