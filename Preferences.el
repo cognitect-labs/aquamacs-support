@@ -46,7 +46,7 @@
      (define-key paredit-mode-map (kbd "C-M-x") 'lisp-eval-defun) ;; primary eval command
      (define-key paredit-mode-map (kbd "C-c C-e") 'lisp-eval-defun)
      (define-key paredit-mode-map (kbd "C-x C-e") 'lisp-eval-last-sexp)
-     (define-key paredit-mode-map (kbd "C-c C-l") 'lisp-load-file)
+     (define-key paredit-mode-map (kbd "C-c C-l") 'lisp-load-buffer)
      (define-key paredit-mode-map (kbd "C-c C-n") 'lisp-eval-form-and-next)
      (define-key paredit-mode-map (kbd "C-c C-p") 'lisp-eval-paragraph)
      (define-key paredit-mode-map (kbd "C-c C-r") 'lisp-eval-region)
@@ -63,6 +63,14 @@
 (add-hook 'lisp-mode-hook              #'enable-paredit-mode)
 (add-hook 'lisp-interaction-mode-hook  #'enable-paredit-mode)
 (add-hook 'clojure-mode-hook           #'enable-paredit-mode)
+
+(defun lisp-load-buffer ()
+  "Start at top of buffer, eval each form in the inferior-lisp buffer until reaching end of file."
+  (interactive)
+  (save-excursion
+    (goto-char (point-min))
+    (while (< (point) (point-max))
+      (lisp-eval-form-and-next))))
 
 (setq inferior-lisp-program "clojure")
 
