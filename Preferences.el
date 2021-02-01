@@ -106,7 +106,10 @@
 	    cb (curent-buffer))
     (cd dd)
     (add-to-list 'clj-repl-command-history cmd)
-    (run-lisp cmd)
+    (if (boundp 'lisp-environment)
+        (let ((process-environment (append process-environment clj-environment)))
+          (run-lisp cmd))
+      (run-lisp cmd))
     (switch-to-buffer cb)
     (switch-to-buffer-other-window "*inferior-lisp*")))
 

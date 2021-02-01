@@ -29,8 +29,10 @@ Code can be sent from a file to the REPL with [Clojure shortcuts](#clojure), or 
 A file named `.dir-locals.el` can be placed anywhere upstream of the file you run clojure on.
 
 ~~~
-(clojure-mode (clj-repl-command "clojure -A:dev"
-                                "clojure -A:test"))
+((clojure-mode (clj-repl-command  "clojure -A:dev"
+                                  "clojure -A:test")
+               (clj-environment "MY_TEST_VAR=1"
+                                "OTHER_TEST_VAR=OPTION2")))
 ~~~
 
 When using `Control-c Control-z` with this `.dir-locals.el` you will be able to:
@@ -41,6 +43,8 @@ When using `Control-c Control-z` with this `.dir-locals.el` you will be able to:
 * Search for a command in your .dir-locals.el and command history with `Option-r`
 
 `C-z` will automatically launch a REPL with the first defined command in the loaded `.dir-locals.el`, or `clojure` if `.dir-locals.el` is not found.
+
+The `clj-environment` variable adds the following strings to the environment in which your repl command is run. The clojure repl run with this `.dir-locals.el` would return "OPTION2" from `(System/getenv "OTHER_TEST_VAR")`.
 
 ## .dir-locals.el Location
 
