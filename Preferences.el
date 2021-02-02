@@ -106,7 +106,7 @@
 	    cb (curent-buffer))
     (cd dd)
     (add-to-list 'clj-repl-command-history cmd)
-    (if (boundp 'lisp-environment)
+    (if (boundp 'clj-environment)
         (let ((process-environment (append process-environment clj-environment)))
           (run-lisp cmd))
       (run-lisp cmd))
