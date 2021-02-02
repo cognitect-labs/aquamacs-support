@@ -51,12 +51,9 @@
      (define-key paredit-mode-map (kbd "C-c C-p") 'lisp-eval-paragraph)
      (define-key paredit-mode-map (kbd "C-c C-r") 'lisp-eval-region)
      (define-key paredit-mode-map (kbd "C-M-q") 'indent-sexp)
-     (define-key paredit-mode-map (kbd "C-c C-v") 'lisp-show-variable-documentation) ;; not working currently
-     (define-key paredit-mode-map (kbd "C-c C-a") 'lisp-show-arglist) ;; not working currently
-     (define-key paredit-mode-map (kbd "C-c C-c") 'lisp-compile-defun) ;; not working currently
-     (define-key paredit-mode-map (kbd "C-c C-d") 'lisp-describe-sym) ;; not working currently
-     (define-key paredit-mode-map (kbd "C-c C-f") 'lisp-show-function-documentation) ;; not working currently
-     (define-key paredit-mode-map (kbd "C-c C-k") 'lisp-compile-file) ;; not working currently
+     (define-key paredit-mode-map (kbd "C-c C-v") 'lisp-show-variable-documentation)
+     (define-key paredit-mode-map (kbd "C-c C-f") 'lisp-show-function-documentation)
+     (define-key paredit-mode-map (kbd "C-c C-a") 'lisp-show-arglist)
      ))
 
 (add-hook 'eval-expression-minibuffer-setup-hook #'enable-paredit-mode)
@@ -112,6 +109,18 @@
       (run-lisp cmd))
     (switch-to-buffer cb)
     (switch-to-buffer-other-window "*inferior-lisp*")))
+
+(setq lisp-function-doc-command
+      "(clojure.repl/doc %s)\n")
+
+(setq lisp-var-doc-command
+      "(clojure.repl/doc %s)\n")
+
+(setq lisp-arglist-command
+      "(if-let [x (resolve '%1$s)] 
+         (str \"%1$s args: \"
+             (:arglists (meta x)))
+         \"arglist metadata not found for %1$s\")\n")
 
 ;; Remove this line to disable warnings about unsafe variables when using .dir-locals with 'run-command
 ;; Only use this if you are certain of the integrity of .dir-locals files upstream of where you launch your REPL
