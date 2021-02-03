@@ -117,10 +117,9 @@
       "(clojure.repl/doc %s)\n")
 
 (setq lisp-arglist-command
-      "(if-let [x (resolve '%1$s)] 
-         (str \"%1$s args: \"
-             (:arglists (meta x)))
-         \"arglist metadata not found for %1$s\")\n")
+      "(str \"%1$s args: \"
+            (or (some-> '%1$s resolve meta :arglists)
+                \"Not Found\"))\n")
 
 ;; Remove this line to disable warnings about unsafe variables when using .dir-locals with 'run-command
 ;; Only use this if you are certain of the integrity of .dir-locals files upstream of where you launch your REPL
