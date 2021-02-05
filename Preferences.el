@@ -123,4 +123,4 @@
 
 ;; Remove this line to disable warnings about unsafe variables when using .dir-locals with 'run-command
 ;; Only use this if you are certain of the integrity of .dir-locals files upstream of where you launch your REPL
-;; (put 'clj-repl-command 'safe-local-variable (lambda () t))
+;; (put 'clj-repl-command 'safe-local-variable (lambda (_) t))
