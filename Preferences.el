@@ -42,8 +42,8 @@
   '(progn
      (define-key paredit-mode-map (kbd "C-z") 'run-clojure-no-prompt)
      (define-key paredit-mode-map (kbd "C-c C-z") 'run-clojure)
-     (define-key paredit-mode-map (kbd "C-M-x") 'lisp-eval-defun) ;; primary eval command
-     (define-key paredit-mode-map (kbd "C-c C-e") 'lisp-eval-defun)
+     (define-key paredit-mode-map (kbd "C-M-x") 'clj-eval-defun) ;; primary eval command
+     (define-key paredit-mode-map (kbd "C-c C-e") 'clj-eval-defun)
      (define-key paredit-mode-map (kbd "C-x C-e") 'lisp-eval-last-sexp)
      (define-key paredit-mode-map (kbd "C-c C-l") 'lisp-load-file)
      (define-key paredit-mode-map (kbd "C-c C-n") 'lisp-eval-form-and-next)
@@ -103,4 +103,53 @@
 
 ;; Remove this line to disable warnings about unsafe variables when using .dir-locals with 'run-command
 ;; Only use this if you are certain of the integrity of .dir-locals files upstream of where you launch your REPL
-;; (put 'clj-repl-command 'safe-local-variable (lambda () t))
+;; (put 'clj-repl-command 'safe-local-variable (lambda (_) t))
+
+;; regex, not plain string
+;; TODO allow define in dir-local
+(defconst ignored-forms '("comment"))
+
+(defun check-ignored-forms (forms)
+  (interactive "P")
+  (let ((ret nil))
+    (dolist (form ignored-forms)
+      (when (looking-at (concat "(" form))
+        (setq ret 't)))
+    ret))
+
+(defun clj-do-defun (do-region)
+  "Send the current defun to the inferior Lisp process.
+The actually processing is done by `do-region'. Ignores (comment) forms."
+  (save-excursion
+    ;; if there's a form after the cursor, jump into it before parsing.
+    ;; lisp-eval-defun doesn't do this. Unsure if we should?
+    ;;(when (looking-at "(")
+    ;;  (down-list))
+    (let ((err nil)
+          (forms '()))
+      ;; build a list of sexp start locations before the cursor position
+      ;; error on top-level form and continue
+      (while (not (eq err 1))
+        (condition-case nil
+            (backward-up-list nil t)
+          (error (setq err 1)))
+        (add-to-list 'forms (point)))
+      ;; We're at the top-level defun now, check for comment
+      ;; This could check against a list of forms to ignore and
+      ;; climb up to the first not-ignored form
+      (if (check-ignored-forms ignored-forms) ;;(looking-at "(comment")
+          (if (or (eq 1 (length forms)) (null forms))
+              (message "No top level form, or top level form ignored.")
+            (progn
+              (goto-char (cadr forms))
+              (forward-sexp)
+              (funcall do-region (cadr forms) (point))))
+        (progn
+         (let ((start (point)))
+           (forward-sexp)
+           (funcall do-region start (point))))))))
+
+(defun clj-eval-defun ()
+  "Send the current defun to the inferior Lisp process, assuming a Clojure REPL."
+  (interactive "P")
+  (clj-do-defun 'lisp-eval-region))
