@@ -46,6 +46,7 @@
      (define-key paredit-mode-map (kbd "C-c C-e") 'clj-eval-defun)
      (define-key paredit-mode-map (kbd "C-x C-e") 'lisp-eval-last-sexp)
      (define-key paredit-mode-map (kbd "C-c C-l") 'clj-load-file)
+     (define-key paredit-mode-map (kbd "C-c C-b") 'clj-load-buffer)
      (define-key paredit-mode-map (kbd "C-c C-n") 'lisp-eval-form-and-next)
      (define-key paredit-mode-map (kbd "C-c C-p") 'lisp-eval-paragraph)
      (define-key paredit-mode-map (kbd "C-c C-r") 'lisp-eval-region)
@@ -165,3 +166,12 @@ of the file associated with the current buffer. Supports history."
          (load-string (format "(load-file \"%s\")\n" file-name)))
     (comint-check-source file-name)
     (comint-send-string proc load-string)))
+
+(defun clj-load-buffer ()
+  "Start at top of buffer, eval each form in the inferior-lisp buffer until reaching end of file.
+This strategy avoids a comint string-length limit on macOS that exists at time of writing."
+  (interactive)
+  (save-excursion
+    (goto-char (point-min))
+    (while (< (point) (point-max))
+      (lisp-eval-form-and-next))))
