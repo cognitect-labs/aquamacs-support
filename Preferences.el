@@ -28,7 +28,6 @@
      (define-key paredit-mode-map (kbd "M-S-s") 'paredit-split-sexp)
      (define-key paredit-mode-map (kbd "M-s") 'paredit-splice-sexp)
      (define-key paredit-mode-map (kbd "C-k") 'paredit-kill)
-     (define-key paredit-mode-map (kbd "C-S-k") 'paredit-kill-backward)
      (define-key paredit-mode-map (kbd "M-[") 'paredit-wrap-square)
      (define-key paredit-mode-map (kbd "M-{") 'paredit-wrap-curly)
      (define-key paredit-mode-map (kbd "M-(") 'paredit-wrap-round)
@@ -51,11 +50,10 @@
      (define-key paredit-mode-map (kbd "C-c C-p") 'lisp-eval-paragraph)
      (define-key paredit-mode-map (kbd "C-c C-r") 'lisp-eval-region)
      (define-key paredit-mode-map (kbd "C-M-q") 'indent-sexp)
-     (define-key paredit-mode-map (kbd "C-c C-v") 'lisp-show-variable-documentation) ;; not working currently
-     (define-key paredit-mode-map (kbd "C-c C-a") 'lisp-show-arglist) ;; not working currently
+     (define-key paredit-mode-map (kbd "C-c C-v") 'lisp-show-variable-documentation)
+     (define-key paredit-mode-map (kbd "C-c C-f") 'lisp-show-function-documentation)
+     (define-key paredit-mode-map (kbd "C-c C-a") 'lisp-show-arglist)
      (define-key paredit-mode-map (kbd "C-c C-c") 'lisp-compile-defun) ;; not working currently
-     (define-key paredit-mode-map (kbd "C-c C-d") 'lisp-describe-sym) ;; not working currently
-     (define-key paredit-mode-map (kbd "C-c C-f") 'lisp-show-function-documentation) ;; not working currently
      (define-key paredit-mode-map (kbd "C-c C-k") 'lisp-compile-file) ;; not working currently
      ))
 
@@ -63,6 +61,17 @@
 (add-hook 'lisp-mode-hook              #'enable-paredit-mode)
 (add-hook 'lisp-interaction-mode-hook  #'enable-paredit-mode)
 (add-hook 'clojure-mode-hook           #'enable-paredit-mode)
+
+(setq lisp-function-doc-command
+      "(clojure.repl/doc %s)\n")
+
+(setq lisp-var-doc-command
+      "(clojure.repl/doc %s)\n")
+
+(setq lisp-arglist-command
+      "(str \"%1$s args: \"
+            (or (some-> '%1$s resolve meta :arglists)
+                \"Not Found\"))\n")
 
 (setq inferior-lisp-program "clojure")
 
