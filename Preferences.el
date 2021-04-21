@@ -45,7 +45,7 @@
      (define-key paredit-mode-map (kbd "C-M-x") 'clj-eval-defun) ;; primary eval command
      (define-key paredit-mode-map (kbd "C-c C-e") 'clj-eval-defun)
      (define-key paredit-mode-map (kbd "C-x C-e") 'lisp-eval-last-sexp)
-     (define-key paredit-mode-map (kbd "C-c C-l") 'lisp-load-file)
+     (define-key paredit-mode-map (kbd "C-c C-l") 'clj-load-file)
      (define-key paredit-mode-map (kbd "C-c C-n") 'lisp-eval-form-and-next)
      (define-key paredit-mode-map (kbd "C-c C-p") 'lisp-eval-paragraph)
      (define-key paredit-mode-map (kbd "C-c C-r") 'lisp-eval-region)
@@ -153,3 +153,15 @@ The actually processing is done by `do-region'. Ignores (comment) forms."
   "Send the current defun to the inferior Lisp process, assuming a Clojure REPL."
   (interactive "P")
   (clj-do-defun 'lisp-eval-region))
+
+(defvar clj-load-file-history '())
+
+(defun clj-load-file (file-name)
+  "Send (load-file) to the inferor-lisp process with an argument
+of the file associated with the current buffer. Supports history."
+  (interactive (list
+                (read-from-minibuffer "File Path:" (buffer-file-name) nil nil 'clj-load-file-history)))
+  (let ((proc (inferior-lisp-proc))
+         (load-string (format "(load-file \"%s\")\n" file-name)))
+    (comint-check-source file-name)
+    (comint-send-string proc load-string)))
