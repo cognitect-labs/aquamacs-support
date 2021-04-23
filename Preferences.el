@@ -159,10 +159,11 @@ The actually processing is done by `do-region'. Ignores (comment) forms."
            (forward-sexp)
            (funcall do-region start (point))))))))
 
-(defun clj-eval-defun ()
+(defun clj-eval-defun (&optional and-go)
   "Send the current defun to the inferior Lisp process, assuming a Clojure REPL."
   (interactive "P")
-  (clj-do-defun 'lisp-eval-region))
+  (clj-do-defun 'lisp-eval-region)
+  (if and-go (switch-to-lisp t)))
 
 (defvar clj-load-file-history '())
 
