@@ -75,6 +75,8 @@
 
 (setq inferior-lisp-program "clojure")
 
+(setq clojure-build-tool-files '("deps.edn"))
+
 (defvar clj-repl-command)
 
 (defvar clj-repl-command-history '())
