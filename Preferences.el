@@ -99,20 +99,23 @@
                   (read-from-minibuffer "Command:" "clojure" nil nil 'clj-repl-command-history))))
   (run-clojure-command cmd))
 
- (defun run-clojure-command (cmd)
-   (let ((dd (if (and (fboundp 'clojure-project-root-path)
-                    (stringp (clojure-project-root-path)))
-               (clojure-project-root-path)
-             (let ((dir-locals-dir (car (dir-locals-find-file (buffer-file-name)))))
-               (if dir-locals-dir
-                   dir-locals-dir
-                 default-directory))))
-       (cb (current-buffer)))
-   (cd dd)
-   (add-to-list 'clj-repl-command-history cmd)
-   (run-lisp cmd)
-   (switch-to-buffer cb)
-   (switch-to-buffer-other-window "*inferior-lisp*")))
+(defun run-clojure-command (cmd)
+  (let* ((dd (if (and (fboundp 'clojure-project-root-path)
+		      (stringp (clojure-project-root-path)))
+		 (clojure-project-root-path)
+	       (let ((dir-locals-dir (car (dir-locals-find-file (buffer-file-name)))))
+		 (if dir-locals-dir
+		     dir-locals-dir
+		   default-directory))))
+	 (cb (current-buffer))
+	 (cmd-exists (executable-find (car (split-string cmd "\s"))))
+	 (cmd-to-run (if cmd-exists
+			 cmd
+		       (concat dd cmd))))
+    (add-to-list 'clj-repl-command-history cmd)
+    (run-lisp cmd-to-run)
+    (switch-to-buffer cb)
+    (switch-to-buffer-other-window "*inferior-lisp*")))
 
 ;; Remove this line to disable warnings about unsafe variables when using .dir-locals with 'run-command
 ;; Only use this if you are certain of the integrity of .dir-locals files upstream of where you launch your REPL
