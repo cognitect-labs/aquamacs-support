@@ -11,12 +11,16 @@
 ;; WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 ;; See the License for the specific language governing permissions and
 ;; limitations under the License.
+
 ;;TODO - Temporarily disable until certain it's necessary for workflows
 ;;(when (memq window-system '(mac ns x))
 ;;  (exec-path-from-shell-initialize))
+
 (require 'clojure-mode)
 
 (require 'paredit)
+
+;; Keybindings
 
 (eval-after-load 'paredit
   '(progn
@@ -57,10 +61,14 @@
      (define-key paredit-mode-map (kbd "C-c C-k") 'lisp-compile-file) ;; not working currently
      ))
 
+;; Hooks
+
 (add-hook 'eval-expression-minibuffer-setup-hook #'enable-paredit-mode)
 (add-hook 'lisp-mode-hook              #'enable-paredit-mode)
 (add-hook 'lisp-interaction-mode-hook  #'enable-paredit-mode)
 (add-hook 'clojure-mode-hook           #'enable-paredit-mode)
+
+;; Vars
 
 (setq lisp-function-doc-command
       "(clojure.repl/doc %s)\n")
@@ -82,6 +90,8 @@
 (defvar clj-repl-command-history '())
 
 (add-to-list 'savehist-additional-variables 'clj-repl-command-history)
+
+;; Clojure Functions
 
 (defun run-clojure-no-prompt ()
   (interactive)
@@ -115,13 +125,13 @@
 			 cmd
 		       (concat dd cmd))))
     (add-to-list 'clj-repl-command-history cmd)
+    (if (boundp 'process-env)
+        (set-environment process-env))
     (run-lisp cmd-to-run)
     (switch-to-buffer cb)
     (switch-to-buffer-other-window "*inferior-lisp*")))
 
-;; Remove this line to disable warnings about unsafe variables when using .dir-locals with 'run-command
-;; Only use this if you are certain of the integrity of .dir-locals files upstream of where you launch your REPL
-;; (put 'clj-repl-command 'safe-local-variable (lambda (_) t))
+;; Lisp workflow modifications
 
 ;; regex, not plain string
 ;; TODO allow define in dir-local
@@ -193,3 +203,15 @@ This strategy avoids a comint string-length limit on macOS that exists at time o
     (goto-char (point-min))
     (while (< (point) (point-max))
       (lisp-eval-form-and-next))))
+
+;; Optional Settings
+
+;; Remove comment in below line to disable warnings about unsafe variables when using .dir-locals with 'run-command
+;; Only use this if you are certain of the integrity of .dir-locals files upstream of where you launch your REPL
+;; ----
+;; (put 'clj-repl-command 'safe-local-variable (lambda (_) t))
+
+;; Remove comment in below line to automatically enable clojure-mode for files ending in the supplied file extensions.
+;; The string arguments are emacs regex. https://www.gnu.org/software/emacs/manual/html_node/emacs/Regexps.html
+;; ----
+;; (add-to-list 'auto-mode-alist '("\\.repl$\\'" . clojure-mode))
