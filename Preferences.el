@@ -111,6 +111,13 @@
                   (read-from-minibuffer "Command:" "clojure" nil nil 'clj-repl-command-history))))
   (run-clojure-command cmd))
 
+(defun set-environment (env-alist)
+  (mapcar (lambda (e)
+            (let ((key (car e))
+                  (val (cdr e)))
+              (setenv key val)))
+          env-alist))
+
 (defun run-clojure-command (cmd)
   (let* ((dd (if (and (fboundp 'clojure-project-root-path)
 		      (stringp (clojure-project-root-path)))
