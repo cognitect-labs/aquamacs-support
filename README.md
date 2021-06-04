@@ -30,7 +30,7 @@ A file named `.dir-locals.el` can be placed anywhere upstream of the file you ru
 
 ~~~
 ((clojure-mode (clj-repl-command "clojure -A:dev"
-    "clojure -X:socketserver :port 1337"
+                                 "clojure -X:socketserver :port 1337"
 				                 "java -jar clojure.jar"
 				                 "clojure")))
 ~~~
@@ -57,6 +57,33 @@ If you `C-c C-z` on `~/my-project/src/killer-app.clj` then the command will look
 It is recommended to keep a single `.dir-locals.el` in the root directory of your project.
 
 If the project already has a `.dir-locals.el` that you can not change (perhaps it's under version control), then you can place your user settings in `.dir-locals-2.el`.
+
+## REPL executable path
+
+Any program that uses stdin/stdout/stderr can be launched as a REPL.
+
+The path which is used to launched the executable from is the _first_ valid option:
+
+1. The nearest direct parent directory with a `deps.edn` file.
+2. The nearest direct parent directory with a `.dir-locals.el` file.
+3. The `PATH` of your default shell.
+
+### Project defining files
+
+Aquamacs-support overrides clojure-mode's support for different project-root defining files.
+
+Project-defining files can be added using .dir-locals.el by setting the `clj-build-tool-files` var to the names of the files which may determine a project root:
+
+~~~
+((clojure-mode (clj-repl-command "clojure -A:dev"
+                                 "clojure -X:socketserver :port 1337"
+				                 "java -jar clojure.jar"
+				                 "clojure")
+               (clj-build-tool-files "deps.edn" 
+                                     "build.boot"))
+~~~
+
+These files will be searched for, up the directory tree, in the provided order.
 
 # Features
 
