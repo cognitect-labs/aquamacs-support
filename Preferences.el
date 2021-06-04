@@ -221,4 +221,4 @@ This strategy avoids a comint string-length limit on macOS that exists at time o
 ;; Remove comment in below line to automatically enable clojure-mode for files ending in the supplied file extensions.
 ;; The string arguments are emacs regex. https://www.gnu.org/software/emacs/manual/html_node/emacs/Regexps.html
 ;; ----
-;; (add-to-list 'auto-mode-alist '("\\.repl$\\'" . clojure-mode))
+;; (add-to-list 'auto-mode-alist '("\\.repl\\'" . clojure-mode))
