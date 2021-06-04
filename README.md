@@ -85,6 +85,20 @@ Project-defining files can be added using `.dir-locals.el` by setting the `clj-b
 
 These files will be searched for, up the directory tree, in the provided order.
 
+### REPL Environment Variables
+
+Environment variables can be set for the REPL process by adding `process-env` to your `.dir-locals.el`. The value is an [Association List](https://www.gnu.org/software/emacs/manual/html_node/elisp/Association-Lists.html)
+
+~~~
+((clojure-mode (clj-repl-command "clojure -A:dev"
+                                 "clojure -X:socketserver :port 1337"
+				                 "java -jar clojure.jar"
+				                 "clojure")
+               (process-env ("JAVA_HOME" . "jdk-install-dir)
+                            ("AWS_PROFILE" . "Production"))))
+~~~
+
+
 # Features
 
 * [Clojure Mode](https://github.com/clojure-emacs/clojure-mode)
@@ -121,7 +135,7 @@ TODO: Replace emacs function name with simple description
      
 | Hotkey              | Function                                              |
 | ---                 | ---                                                   |
-| Control-z           | Start REPL with first .dir-locals value, or "clojure" |
+| Control-z           | Start REPL with first .dir-locals value, or clojure" |
 | Control-c Control-z | Start REPL, prompt for command                        |
 | Control-:           | clojure-toggle-keyword-string                         |
 | Control-c \<space\> | clojure-align                                         |
